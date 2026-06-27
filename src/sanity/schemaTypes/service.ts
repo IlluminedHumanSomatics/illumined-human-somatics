@@ -2,7 +2,7 @@ import { defineType, defineField, defineArrayMember } from 'sanity'
 
 export const service = defineType({
   name: 'service',
-  title: 'Service',
+  title: 'Offering',
   type: 'document',
   fields: [
     defineField({

@@ -1,26 +1,106 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@theme {
+  /* ── Warm honey palette (brighter, cozier) ────────────────── */
+  --color-cream: #fbe8ce; /* warm honey cream — page background */
+  --color-deep: #3a2412; /* warm dark brown — headings, dark text */
+  --color-orange: #d96a36; /* sunset coral — primary accent, main CTA */
+  --color-terra: #c0562f; /* terracotta — secondary accent */
+  --color-gold: #e0972c; /* honey gold — rays, dividers */
+  --color-yellow: #efbe5e; /* warm light gold — rays */
+  --color-turq: #46a89b; /* turquoise — jewel accent */
+  --color-turq-deep: #2c807a; /* deep teal */
+  --color-turq-light: #6fc2b5; /* bright teal */
+  --color-mid: #7a4a22; /* readable warm brown — body text */
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  /* semantic aliases */
+  --color-background: #fbe8ce;
+  --color-foreground: #3a2412;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  /* type families (wired up in layout.tsx via next/font) */
+  --font-sans: var(--font-body), ui-sans-serif, system-ui, sans-serif; /* body — Jost */
+  --font-display: var(--font-display), ui-serif, Georgia, serif; /* headings — Cormorant Garamond */
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-cream);
+  color: var(--color-mid);
+  font-family: var(--font-sans);
+  font-weight: 300;
+  -webkit-font-smoothing: antialiased;
+}
+
+@layer base {
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    font-weight: 300;
+    color: var(--color-deep);
+  }
+}
+
+::selection {
+  background: var(--color-turq-light);
+  color: var(--color-deep);
+}
+
+/* ── Radiant sun animations (hero motif) ──────────────────── */
+@keyframes ihs-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes ihs-spin-rev {
+  to {
+    transform: rotate(-360deg);
+  }
+}
+@keyframes ihs-breathe {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.015);
+  }
+}
+@keyframes ihs-pulse {
+  0%,
+  100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+.ihs-spin,
+.ihs-spin-rev,
+.ihs-breathe,
+.ihs-pulse {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+.ihs-spin {
+  animation: ihs-spin 240s linear infinite;
+}
+.ihs-spin-rev {
+  animation: ihs-spin-rev 170s linear infinite;
+}
+.ihs-breathe {
+  animation: ihs-breathe 9s ease-in-out infinite;
+}
+.ihs-pulse {
+  animation: ihs-pulse 9s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ihs-spin,
+  .ihs-spin-rev,
+  .ihs-breathe,
+  .ihs-pulse {
+    animation: none;
+  }
 }

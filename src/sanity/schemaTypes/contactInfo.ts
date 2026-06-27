@@ -7,6 +7,20 @@ export const contactInfo = defineType({
   type: 'document',
   fields: [
     defineField({
+      name: 'bookingUrl',
+      title: 'MassageBook Booking URL',
+      type: 'url',
+      description:
+        'Your MassageBook booking page URL (from Business → Setup → Widgets for Your Website). Powers the embedded scheduler on /book and every "Book" button.',
+    }),
+    defineField({
+      name: 'mindbodyScheduleUrl',
+      title: 'NOW Yoga — Mindbody Schedule URL',
+      type: 'url',
+      description:
+        "Mindbody Branded Web Tools schedule widget (iframe URL), filtered to Molly's classes. Powers the embedded group-class schedule on /classes. Provided by NOW Yoga.",
+    }),
+    defineField({
       name: 'phone',
       title: 'Phone',
       type: 'string',

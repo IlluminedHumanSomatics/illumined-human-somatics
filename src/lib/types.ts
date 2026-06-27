@@ -19,6 +19,41 @@ export interface ServiceDuration {
   price?: string
 }
 
+export interface CtaLink {
+  label?: string
+  href?: string
+}
+
+export interface HomePage {
+  _id: string
+  _type: 'homePage'
+  eyebrow?: string
+  heading?: string
+  subheading?: string
+  intro?: string
+  ceilingImage?: SanityImage
+  videoUrl?: string
+  backgroundPoster?: SanityImage
+  primaryCta?: CtaLink
+  secondaryCta?: CtaLink
+  spaceHeading?: string
+  spaceBody?: string
+  spaceVideoUrl?: string
+  spacePoster?: SanityImage
+}
+
+export interface Testimonial {
+  _id: string
+  _type: 'testimonial'
+  name: string
+  quote: string
+  rating?: number
+  source?: string
+  date?: string
+  featured?: boolean
+  displayOrder?: number
+}
+
 export interface Service {
   _id: string
   _type: 'service'
@@ -61,6 +96,8 @@ export interface About {
 export interface ContactInfo {
   _id: string
   _type: 'contactInfo'
+  bookingUrl?: string
+  mindbodyScheduleUrl?: string
   phone?: string
   email?: string
   locationDescription?: string

@@ -7,8 +7,14 @@ export const structure: StructureResolver = (S) =>
   S.list()
     .title('Content')
     .items([
-      S.documentTypeListItem('service').title('Services'),
-      S.documentTypeListItem('workshop').title('Workshops'),
+      S.listItem()
+        .title('Home Page')
+        .id('homePage')
+        .child(S.document().schemaType('homePage').documentId('homePage')),
+      S.divider(),
+      S.documentTypeListItem('service').title('Offerings'),
+      S.documentTypeListItem('workshop').title('Retreats & Workshops'),
+      S.documentTypeListItem('testimonial').title('Testimonials'),
       S.divider(),
       S.listItem()
         .title('About')

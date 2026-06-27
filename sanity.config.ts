@@ -15,7 +15,7 @@ import { schema } from './src/sanity/schemaTypes'
 import { structure } from './src/sanity/structure'
 
 // about and contactInfo are singletons — only one document of each may exist.
-const singletonTypes = new Set(['about', 'contactInfo'])
+const singletonTypes = new Set(['homePage', 'about', 'contactInfo'])
 const singletonActions = new Set(['publish', 'discardChanges', 'restore'])
 
 export default defineConfig({
