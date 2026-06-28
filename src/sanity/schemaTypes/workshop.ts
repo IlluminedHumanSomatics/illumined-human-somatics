@@ -24,6 +24,12 @@ export const workshop = defineType({
       type: 'date',
     }),
     defineField({
+      name: 'endDate',
+      title: 'End Date',
+      type: 'date',
+      description: 'For multi-day retreats. Leave blank for a single-day event.',
+    }),
+    defineField({
       name: 'startTime',
       title: 'Start Time',
       type: 'string',
@@ -66,6 +72,20 @@ export const workshop = defineType({
           type: 'string',
         }),
       ],
+    }),
+    defineField({
+      name: 'gallery',
+      title: 'Photo Gallery',
+      type: 'array',
+      of: [
+        {
+          type: 'image',
+          options: { hotspot: true },
+          fields: [{ name: 'alt', title: 'Alt text', type: 'string' }],
+        },
+      ],
+      description:
+        'Upload multiple photos (great for retreats) — shown as a grid on the page. Looks best with 2 or 4. If left empty, the single Image above is used instead.',
     }),
     defineField({
       name: 'externalBookingLink',

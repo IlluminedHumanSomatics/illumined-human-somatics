@@ -71,6 +71,7 @@ export interface Workshop {
   title: string
   slug: { current: string }
   date?: string
+  endDate?: string
   startTime?: string
   endTime?: string
   location?: string
@@ -78,6 +79,7 @@ export interface Workshop {
   fullDescription?: PortableTextBlock[]
   price?: string
   image?: SanityImage
+  gallery?: SanityImage[]
   externalBookingLink?: string
   isSoldOut?: boolean
   isFeatured?: boolean
