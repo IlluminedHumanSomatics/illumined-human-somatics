@@ -65,6 +65,7 @@ export async function SiteFooter() {
             <li><Link href="/massage" className="text-cream transition-colors hover:text-turq-deep">Massage</Link></li>
             <li><Link href="/yoga" className="text-cream transition-colors hover:text-turq-deep">Yoga</Link></li>
             <li><Link href="/workshops" className="text-cream transition-colors hover:text-turq-deep">Retreats &amp; Workshops</Link></li>
+            <li><Link href="/contact" className="text-cream transition-colors hover:text-turq-deep">Contact</Link></li>
             <li><Link href="/massage" className="text-cream transition-colors hover:text-turq-deep">Book</Link></li>
           </ul>
         </div>
