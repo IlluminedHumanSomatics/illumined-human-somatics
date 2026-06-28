@@ -18,6 +18,8 @@ export default async function YogaPage() {
   const scheduleUrl = contact?.mindbodyScheduleUrl
   const yogaSixUrl =
     contact?.yogaSixUrl ?? 'https://www.yogasix.com/location/slabtown'
+  const nowYogaUrl =
+    contact?.nowYogaUrl ?? 'https://www.nowyogapdx.com/schedule'
 
   return (
     <section className="px-6 py-12">
@@ -53,11 +55,14 @@ export default async function YogaPage() {
           <p className="mt-4 flex-1 leading-relaxed text-mid">
             Weekly group classes in a warm, welcoming community space.
           </p>
-          {scheduleUrl && (
-            <span className="mt-6 self-start font-sans text-[10px] font-medium uppercase tracking-[0.18em] text-turq-deep">
-              Schedule above ↑
-            </span>
-          )}
+          <a
+            href={nowYogaUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-6 self-start rounded-full border border-turq-deep px-6 py-2.5 font-sans text-[10px] font-medium uppercase tracking-[0.18em] text-turq-deep transition-colors hover:bg-turq-deep hover:text-cream"
+          >
+            View schedule →
+          </a>
         </div>
 
         <div className="flex flex-col rounded-3xl border border-mid/15 bg-white/55 p-8">

@@ -21,6 +21,13 @@ export const contactInfo = defineType({
         "Mindbody Branded Web Tools schedule widget (iframe URL), filtered to Molly's classes. Powers the embedded group-class schedule on /classes. Provided by NOW Yoga.",
     }),
     defineField({
+      name: 'nowYogaUrl',
+      title: 'NOW Yoga — Schedule Link',
+      type: 'url',
+      description:
+        "Link for the NOW Yoga 'View schedule' button on /yoga. Defaults to nowyogapdx.com/schedule if left blank.",
+    }),
+    defineField({
       name: 'yogaSixUrl',
       title: 'YogaSix — Slabtown URL',
       type: 'url',
