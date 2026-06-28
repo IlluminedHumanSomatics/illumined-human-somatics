@@ -30,10 +30,23 @@ We currently show placeholders — please confirm or correct:
   - *(Placeholders now: Somatic Attunement — 75/90/105/120 min at $130/$155/$180/$210; Couples Massage — 75 min $300.)*
 - [ ] Any **policies** worth stating (cancellation, late arrival, what's included).
 
-## 5. Booking — MassageBook (private sessions) ⭐
-- [ ] Your **MassageBook booking link OR embed code.**
-  - In MassageBook: **Business → Setup → Widgets for Your Website → Booking Widgets** → copy the booking page link/code.
-  - This powers the `/book` page and every "Book a session" button.
+## 5. Massage — your 3 locations, schedules & booking ⭐
+You do massage at **three places** — we want all three on the site. For **each location** we need:
+- [ ] **The Yurt** (Portland) — confirm address + the days/times you're there.
+- [ ] **NOW Massage — Sellwood** — address, the days/times you're there.
+- [ ] **3rd location** — which place is it? Name + address + your days/times.
+
+**How does booking work at each?** (This is the key question that shapes the page.)
+- [ ] Does your **MassageBook** cover *all three* locations, or just the yurt?
+  - Heads up: your MassageBook widget already has "Business locations" / "Travel to me" tabs — so it may already handle more than one. Take a look.
+- [ ] Do **NOW Massage** and the **3rd place** book through *their own* websites/systems instead? If so, send the **booking/schedule link** for each (we'll link out to them, like we do for YogaSix).
+- [ ] Your **MassageBook booking link or embed** (Business → Setup → Widgets for Your Website → Booking Widgets) — powers the embedded scheduler + every "Book" button.
+
+### Massage specialties (highlight with your photos) ⭐
+You took great photos of yourself doing massage — let's build a "specialties" photo section from them.
+- [ ] Tell us **which modality each photo shows** (e.g. Swedish, deep tissue, craniosacral, prenatal, myofascial).
+- [ ] A **one-sentence description** of each specialty (what it's good for / what it feels like).
+- [ ] Send the **photos** themselves (or we'll pull from what you've shared).
 
 ## 6. NOW Yoga — group classes (Mindbody)
 - [ ] The **Mindbody schedule widget code, filtered to your classes**, from **NOW Yoga's** account (you may need to ask them — it's their Mindbody, not yours). In Mindbody: *Branded Web Tools → Schedule widget → filter by staff (you)*.
