@@ -16,6 +16,8 @@ export default async function YogaPage() {
     contact = null
   }
   const scheduleUrl = contact?.mindbodyScheduleUrl
+  const yogaSixUrl =
+    contact?.yogaSixUrl ?? 'https://www.yogasix.com/location/slabtown'
 
   return (
     <section className="px-6 py-12">
@@ -67,7 +69,7 @@ export default async function YogaPage() {
             Heated and flowing group classes at the Slabtown studio.
           </p>
           <a
-            href="https://www.yogasix.com/location/slabtown"
+            href={yogaSixUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="mt-6 self-start rounded-full border border-turq-deep px-6 py-2.5 font-sans text-[10px] font-medium uppercase tracking-[0.18em] text-turq-deep transition-colors hover:bg-turq-deep hover:text-cream"

@@ -100,6 +100,7 @@ export interface ContactInfo {
   _type: 'contactInfo'
   bookingUrl?: string
   mindbodyScheduleUrl?: string
+  yogaSixUrl?: string
   phone?: string
   email?: string
   locationDescription?: string
