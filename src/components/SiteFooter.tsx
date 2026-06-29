@@ -39,6 +39,52 @@ function InstagramIcon() {
   )
 }
 
+// Small rotating sun mark for the footer (deterministic rays + brand spin).
+function FooterSunMark() {
+  const rays = Array.from({ length: 20 }, (_, i) => {
+    const a = (i / 20) * Math.PI * 2
+    const long = i % 5 === 0
+    const r1 = 6
+    const r2 = long ? 26 : 18
+    return {
+      x1: (30 + r1 * Math.sin(a)).toFixed(1),
+      y1: (30 - r1 * Math.cos(a)).toFixed(1),
+      x2: (30 + r2 * Math.sin(a)).toFixed(1),
+      y2: (30 - r2 * Math.cos(a)).toFixed(1),
+      stroke: i % 3 === 0 ? 'var(--color-turq)' : 'var(--color-gold)',
+      opacity: long ? 0.6 : 0.32,
+    }
+  })
+  return (
+    <svg
+      width="34"
+      height="34"
+      viewBox="0 0 60 60"
+      className="overflow-visible"
+      aria-hidden="true"
+    >
+      <g className="ihs-spin">
+        {rays.map((r, i) => (
+          <line
+            key={i}
+            x1={r.x1}
+            y1={r.y1}
+            x2={r.x2}
+            y2={r.y2}
+            stroke={r.stroke}
+            strokeWidth="0.8"
+            strokeLinecap="round"
+            opacity={r.opacity}
+          />
+        ))}
+      </g>
+      <circle cx="30" cy="30" r="9" fill="var(--color-orange)" opacity="0.4" />
+      <circle cx="30" cy="30" r="5.5" fill="var(--color-gold)" opacity="0.6" />
+      <circle cx="30" cy="30" r="3" fill="var(--color-yellow)" opacity="0.9" />
+    </svg>
+  )
+}
+
 export async function SiteFooter() {
   let contact: ContactInfo | null = null
   try {
@@ -72,7 +118,8 @@ export async function SiteFooter() {
 
         {/* Her practice + social */}
         <div className="flex flex-col md:items-end md:text-right">
-          <p className="font-display text-3xl tracking-[0.08em] text-cream">
+          <FooterSunMark />
+          <p className="mt-3 font-display text-3xl tracking-[0.08em] text-cream">
             Illumined Human Somatics
           </p>
           <p className="mt-2 font-display text-lg italic text-turq-deep">
