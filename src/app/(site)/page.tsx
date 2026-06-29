@@ -2,6 +2,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { getHomePage, getAbout, getTestimonials, urlFor } from '@/lib/sanity'
 import { SunMotif } from '@/components/SunMotif'
+import { PatternDivider } from '@/components/PatternDivider'
 
 async function safe<T>(promise: Promise<T>, fallback: T): Promise<T> {
   try {
@@ -115,6 +116,8 @@ export default async function HomePage() {
         </div>
       </section>
 
+      <PatternDivider />
+
       {/* ── Intro / orientation ──────────────────────────────── */}
       <section className="px-6 pb-10 pt-6">
         <div className="mx-auto max-w-2xl text-center">
@@ -155,8 +158,10 @@ export default async function HomePage() {
         </div>
       </section>
 
+      <PatternDivider />
+
       {/* ── Reviews ──────────────────────────────────────────── */}
-      <section className="border-t border-mid/10 px-6 py-24">
+      <section className="px-6 pb-24 pt-8">
         <div className="text-center">
           <h2 className="text-4xl text-deep sm:text-5xl">What clients carry home</h2>
           <p className="mt-5 font-sans text-sm tracking-[0.04em] text-mid">
