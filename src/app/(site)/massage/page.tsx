@@ -60,11 +60,79 @@ export default async function MassagePage() {
         </div>
       </section>
 
-      {/* ── Scheduler ────────────────────────────────────────── */}
+      {/* ── Where she practices (3 locations) ────────────────── */}
+      <section className="px-6 pt-16">
+        <div className="mx-auto max-w-2xl text-center">
+          <p className="font-sans text-[12px] font-medium uppercase tracking-[0.16em] text-turq-deep">
+            Where I practice
+          </p>
+          <h2 className="mt-4 text-3xl text-deep sm:text-4xl">
+            Three places to find me
+          </h2>
+        </div>
+
+        <div className="mx-auto mt-10 grid max-w-5xl gap-6 sm:grid-cols-3">
+          {/* The Yurt */}
+          <div className="flex flex-col rounded-3xl border border-mid/15 bg-white/55 p-8">
+            <h3 className="text-2xl text-deep">The Yurt</h3>
+            <p className="mt-1 font-sans text-[11px] uppercase tracking-[0.14em] text-mid/70">
+              Portland
+            </p>
+            <p className="mt-4 flex-1 leading-relaxed text-mid">
+              Somatic massage &amp; bodywork in the hand-crafted yurt.
+            </p>
+            <a
+              href="#book"
+              className="mt-6 self-start rounded-full bg-orange px-6 py-2.5 font-sans text-[10px] font-medium uppercase tracking-[0.18em] text-cream transition-colors hover:bg-deep"
+            >
+              Book a session →
+            </a>
+          </div>
+
+          {/* Yomassage */}
+          <div className="flex flex-col rounded-3xl border border-mid/15 bg-white/55 p-8">
+            <h3 className="text-2xl text-deep">Yomassage</h3>
+            <p className="mt-1 font-sans text-[11px] uppercase tracking-[0.14em] text-mid/70">
+              Portland
+            </p>
+            <p className="mt-4 flex-1 leading-relaxed text-mid">
+              Bodywork sessions at Yomassage — reach out to book a time.
+            </p>
+            <a
+              href="/contact"
+              className="mt-6 self-start rounded-full border border-turq-deep px-6 py-2.5 font-sans text-[10px] font-medium uppercase tracking-[0.18em] text-turq-deep transition-colors hover:bg-turq-deep hover:text-cream"
+            >
+              Inquire →
+            </a>
+          </div>
+
+          {/* Written on the Body */}
+          <div className="flex flex-col rounded-3xl border border-mid/15 bg-white/55 p-8">
+            <h3 className="text-2xl text-deep">Written on the Body</h3>
+            <p className="mt-1 font-sans text-[11px] uppercase tracking-[0.14em] text-mid/70">
+              Portland · Wednesdays
+            </p>
+            <p className="mt-4 flex-1 leading-relaxed text-mid">
+              Massage at the Written on the Body studio, booked through their
+              scheduler.
+            </p>
+            <a
+              href="https://www.portlandmassagestudio.com/massage#molly"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-6 self-start rounded-full border border-turq-deep px-6 py-2.5 font-sans text-[10px] font-medium uppercase tracking-[0.18em] text-turq-deep transition-colors hover:bg-turq-deep hover:text-cream"
+            >
+              Book here →
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Scheduler (the yurt's MassageBook) ───────────────── */}
       <section id="book" className="px-6 pb-16 pt-16">
         <div className="mx-auto max-w-3xl">
           <h2 className="mb-7 text-center text-3xl text-deep sm:text-4xl">
-            Book a session
+            Book at the yurt
           </h2>
           <iframe
             src={bookingUrl}
