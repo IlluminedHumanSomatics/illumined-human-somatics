@@ -70,7 +70,7 @@ export default async function HomePage() {
   return (
     <>
       {/* ── Hero ─────────────────────────────────────────────── */}
-      <section className="relative flex min-h-[88vh] flex-col items-center justify-center overflow-hidden px-6 py-20">
+      <section className="relative flex min-h-[68vh] flex-col items-center justify-center overflow-hidden px-6 py-10">
         {/* Sun as backdrop */}
         <div
           className="pointer-events-none absolute left-1/2 top-1/2 w-[min(680px,95vw)] -translate-x-1/2 -translate-y-1/2"
