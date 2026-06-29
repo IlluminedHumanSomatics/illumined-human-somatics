@@ -34,7 +34,7 @@ We currently show placeholders — please confirm or correct:
 You do massage at **three places** — we want all three on the site. For **each location** we need:
 - [ ] **The Yurt** (Portland) — confirm address + the days/times you're there.
 - [ ] **NOW Massage — Sellwood** — address, the days/times you're there.
-- [ ] **3rd location** — which place is it? Name + address + your days/times.
+- [ ] **Written on the Body** (Portland) — address + the days/times you're there.
 
 **How does booking work at each?** (This is the key question that shapes the page.)
 - [ ] Does your **MassageBook** cover *all three* locations, or just the yurt?
