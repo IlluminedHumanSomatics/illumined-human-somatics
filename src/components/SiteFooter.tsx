@@ -118,10 +118,12 @@ export async function SiteFooter() {
 
         {/* Her practice + social */}
         <div className="flex flex-col md:items-end md:text-right">
-          <FooterSunMark />
-          <p className="mt-3 font-display text-3xl tracking-[0.08em] text-cream">
-            Illumined Human Somatics
-          </p>
+          <div className="flex items-center gap-3">
+            <FooterSunMark />
+            <p className="font-display text-3xl tracking-[0.08em] text-cream">
+              Illumined Human Somatics
+            </p>
+          </div>
           <p className="mt-2 font-display text-lg italic text-turq-deep">
             with Molly Dilg
           </p>
