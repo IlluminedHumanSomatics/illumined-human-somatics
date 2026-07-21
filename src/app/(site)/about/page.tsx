@@ -49,10 +49,10 @@ function FloatPhoto({
 }) {
   return (
     <FadeIn
-      className={`mb-4 mt-2 w-[40%] max-w-[14rem] ${
+      className={`mx-auto mb-6 w-2/3 max-w-[15rem] sm:mb-4 sm:mt-2 sm:w-[40%] sm:max-w-[14rem] ${
         align === 'right'
-          ? 'float-right ml-6 sm:ml-8'
-          : 'float-left mr-6 sm:mr-8'
+          ? 'sm:float-right sm:ml-8'
+          : 'sm:float-left sm:mr-8'
       }`}
     >
       <div className="relative aspect-[4/5] overflow-hidden rounded-2xl">
@@ -60,7 +60,7 @@ function FloatPhoto({
           src={urlFor(image).width(560).quality(80).url()}
           alt={image.alt ?? 'Molly Dilg'}
           fill
-          sizes="(min-width: 640px) 224px, 40vw"
+          sizes="(min-width: 640px) 224px, 66vw"
           className="object-cover"
         />
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-orange/10 via-transparent to-yellow/10" />
