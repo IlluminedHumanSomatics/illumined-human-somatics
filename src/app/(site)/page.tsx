@@ -163,7 +163,7 @@ export default async function HomePage() {
       {/* ── Reviews ──────────────────────────────────────────── */}
       <section className="px-6 pb-24 pt-8">
         <div className="text-center">
-          <h2 className="text-4xl text-deep sm:text-5xl">What clients carry home</h2>
+          <h2 className="text-4xl text-deep sm:text-5xl">What people are saying</h2>
           <p className="mt-5 font-sans text-sm tracking-[0.04em] text-mid">
             <span className="text-gold">★★★★★</span>&nbsp;&nbsp;5.0 · Verified on
             MassageBook
@@ -212,9 +212,9 @@ export default async function HomePage() {
       <section className="border-t border-mid/10">
         <div className="mx-auto grid max-w-5xl items-center gap-16 px-6 py-24 md:grid-cols-2">
           {about?.photo ? (
-            <div className="relative aspect-[3/4] overflow-hidden rounded-3xl">
+            <div className="relative aspect-[4/5] overflow-hidden rounded-3xl">
               <Image
-                src={urlFor(about.photo).width(800).height(1066).url()}
+                src={urlFor(about.photo).width(800).height(1000).url()}
                 alt={about.photo.alt ?? about.fullName}
                 fill
                 sizes="(min-width: 768px) 50vw, 100vw"
@@ -222,7 +222,7 @@ export default async function HomePage() {
               />
             </div>
           ) : (
-            <div className="flex aspect-[3/4] items-center justify-center border border-orange/15 bg-gradient-to-br from-orange/[0.06] to-turq/[0.05] font-sans text-[11px] uppercase tracking-[0.14em] text-mid/30">
+            <div className="flex aspect-[4/5] items-center justify-center border border-orange/15 bg-gradient-to-br from-orange/[0.06] to-turq/[0.05] font-sans text-[11px] uppercase tracking-[0.14em] text-mid/30">
               Molly&rsquo;s photo
             </div>
           )}

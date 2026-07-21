@@ -22,7 +22,7 @@ async function safe<T>(promise: Promise<T>, fallback: T): Promise<T> {
 
 const tagline = 'I add light through grounded gratitude and empathic inquiry.'
 
-const proseP = 'mx-auto max-w-2xl px-6 leading-loose text-mid'
+const storyP = 'mt-8 leading-loose text-mid'
 const dropCap =
   'first-letter:float-left first-letter:mr-3 first-letter:mt-1 first-letter:font-display first-letter:text-[3.4rem] first-letter:font-normal first-letter:leading-[0.7] first-letter:text-orange'
 
@@ -39,8 +39,8 @@ const bio = [
   `My favorite modalities and techniques to weave into a Swedish style massage are myofascial release, tui na, craniosacral, deep tissue, trigger point therapy, breathwork, and vagal toning exercises. My favorite aspects of teaching yoga are the opportunities to somatically experiment with the embodiment of yoga philosophy through theme, the playful presencing of strength and mobility to open and access different parts of our selves and our anatomy, and the collective effervescence that comes with moving and breathing in a shared and synchronized rhythm to music. And my favorite type of client is YOU :) Hope to work with you soon!`,
 ]
 
-// A portrait photo that floats to one side, with the dreamy warm treatment.
-function StoryPhoto({
+// A portrait that floats beside the text — the story wraps around it.
+function FloatPhoto({
   image,
   align,
 }: {
@@ -48,39 +48,41 @@ function StoryPhoto({
   align: 'left' | 'right'
 }) {
   return (
-    <div className="mx-auto max-w-2xl px-6">
-      <FadeIn
-        className={`my-14 w-2/3 max-w-[17rem] ${align === 'right' ? 'ml-auto' : 'mr-auto'}`}
-      >
-        <div className="relative aspect-[4/5] overflow-hidden rounded-3xl">
-          <Image
-            src={urlFor(image).width(720).quality(80).url()}
-            alt={image.alt ?? 'Molly Dilg'}
-            fill
-            sizes="(min-width: 640px) 272px, 66vw"
-            className="object-cover"
-          />
-          <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-orange/10 via-transparent to-yellow/10" />
-        </div>
-      </FadeIn>
-    </div>
+    <FadeIn
+      className={`mb-4 mt-2 w-[40%] max-w-[14rem] ${
+        align === 'right'
+          ? 'float-right ml-6 sm:ml-8'
+          : 'float-left mr-6 sm:mr-8'
+      }`}
+    >
+      <div className="relative aspect-[4/5] overflow-hidden rounded-2xl">
+        <Image
+          src={urlFor(image).width(560).quality(80).url()}
+          alt={image.alt ?? 'Molly Dilg'}
+          fill
+          sizes="(min-width: 640px) 224px, 40vw"
+          className="object-cover"
+        />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-orange/10 via-transparent to-yellow/10" />
+      </div>
+    </FadeIn>
   )
 }
 
-// The wide, full-width "moment" — with a soft warm light bloom.
-function FeatureBand({ image }: { image: SanityImage }) {
+// One contained landscape "moment" — sized to the reading column, not full-bleed.
+function FeatureImage({ image }: { image: SanityImage }) {
   return (
-    <FadeIn className="my-16">
-      <div className="relative aspect-[16/10] w-full overflow-hidden sm:aspect-[2/1]">
+    <FadeIn className="clear-both my-12">
+      <figure className="relative aspect-[16/10] overflow-hidden rounded-3xl sm:aspect-[16/9]">
         <Image
-          src={urlFor(image).width(1920).quality(82).url()}
+          src={urlFor(image).width(1400).quality(82).url()}
           alt={image.alt ?? 'Molly Dilg'}
           fill
-          sizes="100vw"
+          sizes="(min-width: 672px) 672px, 100vw"
           className="object-cover"
         />
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-orange/[0.12] via-transparent to-yellow/10" />
-      </div>
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-orange/[0.10] via-transparent to-yellow/10" />
+      </figure>
     </FadeIn>
   )
 }
@@ -93,21 +95,21 @@ export default async function AboutPage() {
     <>
       {/* ── Intro ────────────────────────────────────────────── */}
       <section className="px-6 pb-8 pt-20">
-        <div className="mx-auto grid max-w-5xl items-center gap-16 md:grid-cols-2">
+        <div className="mx-auto grid max-w-4xl items-center justify-center gap-12 md:grid-cols-[17rem_auto] md:gap-14">
           {about?.photo ? (
-            <div className="relative aspect-[3/4] overflow-hidden rounded-3xl">
+            <div className="relative mx-auto aspect-[3/4] w-full max-w-[17rem] overflow-hidden rounded-3xl md:mx-0">
               <Image
-                src={urlFor(about.photo).width(800).height(1066).url()}
+                src={urlFor(about.photo).width(680).height(906).url()}
                 alt={about.photo.alt ?? about.fullName}
                 fill
                 priority
-                sizes="(min-width: 768px) 50vw, 100vw"
+                sizes="(min-width: 768px) 272px, 100vw"
                 className="rounded-3xl object-cover"
               />
               <div className="pointer-events-none absolute inset-0 rounded-3xl bg-gradient-to-tr from-orange/10 via-transparent to-yellow/10" />
             </div>
           ) : (
-            <div className="flex aspect-[3/4] items-center justify-center rounded-3xl border border-orange/15 bg-gradient-to-br from-orange/[0.06] to-turq/[0.05] font-sans text-[11px] uppercase tracking-[0.14em] text-mid/30">
+            <div className="mx-auto flex aspect-[3/4] w-full max-w-[17rem] items-center justify-center rounded-3xl border border-orange/15 bg-gradient-to-br from-orange/[0.06] to-turq/[0.05] font-sans text-[11px] uppercase tracking-[0.14em] text-mid/30 md:mx-0">
               Molly&rsquo;s photo
             </div>
           )}
@@ -118,7 +120,7 @@ export default async function AboutPage() {
                 About {about?.fullName ?? 'Molly'}
               </span>
             </div>
-            <h1 className="mt-5 text-3xl leading-[1.18] text-deep sm:text-4xl">
+            <h1 className="mt-5 max-w-[22ch] text-balance text-3xl leading-[1.18] text-deep sm:text-4xl">
               I add <em className="italic text-orange">light</em> through
               grounded gratitude and empathic inquiry.
             </h1>
@@ -138,37 +140,49 @@ export default async function AboutPage() {
       <PatternDivider />
 
       {/* ── Her story (photos woven in) ──────────────────────── */}
-      <section className="pb-24 pt-4">
-        <p className={`${proseP} ${dropCap}`}>{bio[0]}</p>
-        <p className={`${proseP} mt-8`}>{bio[1]}</p>
+      <section className="pb-24 pt-6">
+        <div className="mx-auto max-w-2xl px-6">
+          <p className={`leading-loose text-mid ${dropCap}`}>{bio[0]}</p>
 
-        {story[0] && <StoryPhoto image={story[0]} align="right" />}
+          <div className="mt-8 flow-root">
+            {story[0] && <FloatPhoto image={story[0]} align="right" />}
+            <p className="leading-loose text-mid">{bio[1]}</p>
+          </div>
 
-        <p className={`${proseP} mt-8`}>{bio[2]}</p>
-        <p className={`${proseP} mt-8`}>{bio[3]}</p>
+          <div className="mt-8 flow-root">
+            {story[1] && <FloatPhoto image={story[1]} align="left" />}
+            <p className="leading-loose text-mid">{bio[2]}</p>
+            <p className="mt-6 leading-loose text-mid">{bio[3]}</p>
+          </div>
 
-        <div className="mx-auto mt-10 max-w-2xl px-6">
+          {about?.featureImage && <FeatureImage image={about.featureImage} />}
+
+          <p className={storyP}>{bio[4]}</p>
+
           <FadeIn>
-            <blockquote className="border-y border-turq/25 py-8 text-center">
+            <blockquote className="my-10 border-y border-turq/25 py-8 text-center">
               <p className="mx-auto max-w-lg font-display text-2xl italic leading-snug text-deep sm:text-3xl">
                 &ldquo;&hellip;so clients can listen to the body&rsquo;s whispers
                 before they become yells.&rdquo;
               </p>
             </blockquote>
           </FadeIn>
+
+          <div className="mt-8 flow-root">
+            {story[2] && <FloatPhoto image={story[2]} align="right" />}
+            <p className="leading-loose text-mid">{bio[5]}</p>
+          </div>
+
+          <div className="mt-8 flow-root">
+            {story[3] && <FloatPhoto image={story[3]} align="left" />}
+            <p className="leading-loose text-mid">{bio[6]}</p>
+          </div>
+
+          <div className="mt-8 flow-root">
+            {story[4] && <FloatPhoto image={story[4]} align="right" />}
+            <p className="leading-loose text-mid">{bio[7]}</p>
+          </div>
         </div>
-
-        {about?.featureImage && <FeatureBand image={about.featureImage} />}
-
-        <p className={`${proseP} mt-10`}>{bio[4]}</p>
-        <p className={`${proseP} mt-8`}>{bio[5]}</p>
-
-        {story[1] && <StoryPhoto image={story[1]} align="left" />}
-
-        <p className={`${proseP} mt-8`}>{bio[6]}</p>
-        <p className={`${proseP} mt-8`}>{bio[7]}</p>
-
-        {story[2] && <StoryPhoto image={story[2]} align="right" />}
       </section>
     </>
   )
