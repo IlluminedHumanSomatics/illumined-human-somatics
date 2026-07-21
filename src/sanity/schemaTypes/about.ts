@@ -32,6 +32,29 @@ export const about = defineType({
       ],
     }),
     defineField({
+      name: 'featureImage',
+      title: 'Story Feature Photo (wide / full-width)',
+      type: 'image',
+      options: { hotspot: true },
+      fields: [{ name: 'alt', title: 'Alt text', type: 'string' }],
+      description:
+        'A wide landscape photo shown FULL-WIDTH partway through the story — e.g. the handstand on the painted street sun.',
+    }),
+    defineField({
+      name: 'storyImages',
+      title: 'Story Photos (woven through the story)',
+      type: 'array',
+      of: [
+        {
+          type: 'image',
+          options: { hotspot: true },
+          fields: [{ name: 'alt', title: 'Alt text', type: 'string' }],
+        },
+      ],
+      description:
+        'A few portrait photos placed between paragraphs of the story (they alternate sides). 2–3 is ideal.',
+    }),
+    defineField({
       name: 'certifications',
       title: 'Certifications',
       type: 'array',

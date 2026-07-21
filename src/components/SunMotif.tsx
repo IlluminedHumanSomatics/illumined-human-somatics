@@ -33,9 +33,9 @@ const innerPattern = [
 const innerColors = [
   '#d4a010',
   '#c48810',
-  '#38a8a2',
+  '#d07028',
   '#c87818',
-  '#5ec8c2',
+  '#e8b820',
   '#d4a010',
   '#c88810',
 ]
@@ -100,9 +100,9 @@ export function SunMotif({ className }: { className?: string }) {
           <stop offset="100%" stopColor="#deb888" />
         </radialGradient>
         <radialGradient id="ihs-warmglow" cx="50%" cy="50%" r="50%">
-          <stop offset="0%" stopColor="#f0c860" stopOpacity="0.65" />
-          <stop offset="55%" stopColor="#e0a040" stopOpacity="0.25" />
-          <stop offset="100%" stopColor="#cc7820" stopOpacity="0" />
+          <stop offset="0%" stopColor="#f6c45a" stopOpacity="0.72" />
+          <stop offset="50%" stopColor="#e88a32" stopOpacity="0.4" />
+          <stop offset="100%" stopColor="#d96a36" stopOpacity="0" />
         </radialGradient>
         <filter id="ihs-blurXL" x="-60%" y="-60%" width="220%" height="220%">
           <feGaussianBlur stdDeviation="22" />
@@ -158,8 +158,8 @@ export function SunMotif({ className }: { className?: string }) {
         cx={CX}
         cy={CY}
         r="148"
-        fill="#c07030"
-        opacity="0.16"
+        fill="#cc6418"
+        opacity="0.24"
         filter="url(#ihs-blurXL)"
       />
 
@@ -184,7 +184,7 @@ export function SunMotif({ className }: { className?: string }) {
         fill="url(#ihs-warmglow)"
         filter="url(#ihs-blurL)"
       />
-      <circle cx={CX} cy={CY} r="72" fill="#f0c860" opacity="0.38" filter="url(#ihs-blurM)" />
+      <circle cx={CX} cy={CY} r="72" fill="#f2a44a" opacity="0.42" filter="url(#ihs-blurM)" />
 
       {/* faint yurt rafters (toono) — spokes reaching from the hub out to the rim */}
       <g stroke="#b8562d" strokeWidth="1" strokeLinecap="round" opacity="0.2">
@@ -207,12 +207,9 @@ export function SunMotif({ className }: { className?: string }) {
         cy={CY}
         r="62"
         fill="url(#ihs-inner)"
-        stroke="rgba(70,168,155,.25)"
+        stroke="rgba(224,151,44,.3)"
         strokeWidth="0.8"
       />
-
-      {/* turquoise inner ring — the jewel accent */}
-      <circle cx={CX} cy={CY} r="54" fill="none" stroke="#46a89b" strokeWidth="1.2" opacity="0.5" />
 
       {/* luminous center */}
       <circle

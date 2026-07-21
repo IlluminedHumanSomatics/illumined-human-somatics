@@ -52,7 +52,9 @@ export default async function MassagePage() {
             hand-crafted yurt tucked into the green of Portland.
           </p>
           <a
-            href="#book"
+            href={bookingUrl}
+            target="_blank"
+            rel="noopener noreferrer"
             className="mt-9 inline-block rounded-full bg-orange px-8 py-3.5 font-sans text-[11px] font-light uppercase tracking-[0.22em] text-cream transition-colors hover:bg-deep"
           >
             Book a session
@@ -60,15 +62,10 @@ export default async function MassagePage() {
         </div>
       </section>
 
-      {/* ── Where she practices (3 locations) ────────────────── */}
-      <section className="px-6 pt-16">
+      {/* ── Where to book (3 locations) ──────────────────────── */}
+      <section className="px-6 pb-20 pt-16">
         <div className="mx-auto max-w-2xl text-center">
-          <p className="font-sans text-[12px] font-medium uppercase tracking-[0.16em] text-turq-deep">
-            Where I practice
-          </p>
-          <h2 className="mt-4 text-3xl text-deep sm:text-4xl">
-            Three places to find me
-          </h2>
+          <h2 className="text-3xl text-deep sm:text-4xl">Where to book</h2>
         </div>
 
         <div className="mx-auto mt-10 grid max-w-5xl gap-6 sm:grid-cols-3">
@@ -82,7 +79,9 @@ export default async function MassagePage() {
               Somatic massage &amp; bodywork in the hand-crafted yurt.
             </p>
             <a
-              href="#book"
+              href={bookingUrl}
+              target="_blank"
+              rel="noopener noreferrer"
               className="mt-6 self-start rounded-full bg-orange px-6 py-2.5 font-sans text-[10px] font-medium uppercase tracking-[0.18em] text-cream transition-colors hover:bg-deep"
             >
               Book a session →
@@ -128,20 +127,6 @@ export default async function MassagePage() {
         </div>
       </section>
 
-      {/* ── Scheduler (the yurt's MassageBook) ───────────────── */}
-      <section id="book" className="px-6 pb-16 pt-16">
-        <div className="mx-auto max-w-3xl">
-          <h2 className="mb-7 text-center text-3xl text-deep sm:text-4xl">
-            Book at the yurt
-          </h2>
-          <iframe
-            src={bookingUrl}
-            title="Book a massage with Illumined Human Somatics"
-            className="h-[620px] w-full rounded-2xl border border-mid/10 bg-white"
-            loading="lazy"
-          />
-        </div>
-      </section>
     </>
   )
 }

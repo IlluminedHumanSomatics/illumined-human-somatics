@@ -134,7 +134,7 @@ export default async function HomePage() {
 
       {/* ── The view looking up (real yurt ceiling) ──────────── */}
       <section className="relative">
-        <div className="relative aspect-[4/3] w-full overflow-hidden sm:aspect-[16/9] [&_img]:brightness-[1.03] [&_img]:saturate-[0.95]">
+        <div className="relative aspect-[4/5] w-full overflow-hidden sm:aspect-[16/9] [&_img]:brightness-[1.03] [&_img]:saturate-[0.95]">
           {ceilingUrl ? (
             <Image
               src={ceilingUrl}
@@ -143,7 +143,7 @@ export default async function HomePage() {
               }
               fill
               sizes="100vw"
-              className="object-cover"
+              className="object-cover object-[center_44%]"
             />
           ) : (
             <div className="h-full w-full bg-gradient-to-b from-yellow/40 via-gold/30 to-terra/40" />

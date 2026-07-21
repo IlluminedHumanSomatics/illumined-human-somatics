@@ -96,6 +96,7 @@ export async function SiteFooter() {
   const instagramUrl =
     contact?.instagramUrl ??
     'https://www.instagram.com/illumined_human_somatics/'
+  const email = contact?.email ?? 'illuminedhumansomatics@gmail.com'
   const location = contact?.locationDescription ?? 'Portland, Oregon'
 
   return (
@@ -127,27 +128,25 @@ export async function SiteFooter() {
           <p className="mt-2 font-display text-lg italic text-turq-deep">
             with Molly Dilg
           </p>
-          {contact?.email && (
-            <a
-              href={`mailto:${contact.email}`}
-              className="mt-5 text-base text-cream transition-colors hover:text-turq-deep"
-            >
-              {contact.email}
-            </a>
-          )}
-          <div className="mt-5 flex items-center gap-2.5 text-base text-cream">
-            <MapPin />
-            {location}
-          </div>
+          <a
+            href={`mailto:${email}`}
+            className="mt-5 text-base text-cream transition-colors hover:text-turq-deep"
+          >
+            {email}
+          </a>
           <a
             href={instagramUrl}
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Illumined Human Somatics on Instagram"
-            className="mt-6 inline-flex h-11 w-11 items-center justify-center rounded-full bg-cream/10 text-cream transition-colors hover:bg-turq-deep hover:text-deep"
+            className="mt-5 inline-flex h-11 w-11 items-center justify-center rounded-full bg-cream/10 text-cream transition-colors hover:bg-turq-deep hover:text-deep"
           >
             <InstagramIcon />
           </a>
+          <div className="mt-5 flex items-center gap-2.5 text-base text-cream">
+            <MapPin />
+            {location}
+          </div>
         </div>
       </div>
 

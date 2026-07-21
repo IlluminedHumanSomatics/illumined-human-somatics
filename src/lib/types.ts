@@ -91,6 +91,8 @@ export interface About {
   fullName: string
   bio?: PortableTextBlock[]
   photo?: SanityImage
+  featureImage?: SanityImage
+  storyImages?: SanityImage[]
   certifications?: string[]
   yearsOfPractice?: number
 }
