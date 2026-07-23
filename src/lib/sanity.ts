@@ -4,6 +4,8 @@ import type {
   About,
   ContactInfo,
   HomePage,
+  MassagePage,
+  PracticeLocation,
   Service,
   Testimonial,
   Workshop,
@@ -16,10 +18,7 @@ export async function getHomePage(): Promise<HomePage | null> {
     `*[_type == "homePage"][0]{
       _id, _type, eyebrow, heading, subheading, intro, ceilingImage,
       "videoUrl": backgroundVideo.asset->url,
-      backgroundPoster, primaryCta, secondaryCta,
-      spaceHeading, spaceBody,
-      "spaceVideoUrl": spaceVideo.asset->url,
-      spacePoster
+      backgroundPoster, primaryCta, secondaryCta
     }`,
     {},
     { next: { tags: ['homePage'], revalidate: 3600 } },
@@ -63,6 +62,28 @@ export async function getAbout(): Promise<About | null> {
     `*[_type == "about"][0]`,
     {},
     { next: { tags: ['about'], revalidate: 3600 } },
+  )
+}
+
+export async function getMassagePage(): Promise<MassagePage | null> {
+  return client.fetch<MassagePage | null>(
+    `*[_type == "massagePage"][0]{
+      _id, _type,
+      "heroVideoUrl": heroVideo.asset->url,
+      heroPoster
+    }`,
+    {},
+    { next: { tags: ['massagePage'], revalidate: 3600 } },
+  )
+}
+
+export async function getPracticeLocations(
+  page: 'massage' | 'yoga',
+): Promise<PracticeLocation[]> {
+  return client.fetch<PracticeLocation[]>(
+    `*[_type == "practiceLocation" && page == $page] | order(displayOrder asc, name asc)`,
+    { page },
+    { next: { tags: ['practiceLocation'], revalidate: 3600 } },
   )
 }
 

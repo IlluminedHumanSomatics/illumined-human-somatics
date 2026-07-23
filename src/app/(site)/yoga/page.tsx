@@ -1,7 +1,8 @@
 import type { Metadata } from 'next'
-import { getContactInfo } from '@/lib/sanity'
-import type { ContactInfo } from '@/lib/types'
-import { MapPin } from '@/components/MapPin'
+import { getPracticeLocations } from '@/lib/sanity'
+import type { PracticeLocation } from '@/lib/types'
+import { safe } from '@/lib/safe'
+import { LocationCard } from '@/components/LocationCard'
 
 export const metadata: Metadata = {
   title: 'Yoga · Illumined Human Somatics',
@@ -9,17 +10,36 @@ export const metadata: Metadata = {
     "Molly's group yoga classes at NOW Yoga and YogaSix Slabtown in Portland.",
 }
 
+// Shown only if no yoga locations have been added in Studio yet.
+const fallbackLocations: PracticeLocation[] = [
+  {
+    _id: 'fb-nowyoga',
+    _type: 'practiceLocation',
+    name: 'NOW Yoga',
+    page: 'yoga',
+    area: 'Portland',
+    description: 'Weekly group classes in a warm, welcoming community space.',
+    linkLabel: 'View schedule',
+    linkUrl: 'https://www.nowyogapdx.com/schedule',
+  },
+  {
+    _id: 'fb-yogasix',
+    _type: 'practiceLocation',
+    name: 'YogaSix · Slabtown',
+    page: 'yoga',
+    area: 'NW Portland',
+    description: 'Heated and flowing group classes at the Slabtown studio.',
+    linkLabel: 'View schedule',
+    linkUrl: 'https://www.yogasix.com/location/slabtown',
+  },
+]
+
 export default async function YogaPage() {
-  let contact: ContactInfo | null = null
-  try {
-    contact = await getContactInfo()
-  } catch {
-    contact = null
-  }
-  const yogaSixUrl =
-    contact?.yogaSixUrl ?? 'https://www.yogasix.com/location/slabtown'
-  const nowYogaUrl =
-    contact?.nowYogaUrl ?? 'https://www.nowyogapdx.com/schedule'
+  const cmsLocations = await safe<PracticeLocation[]>(
+    getPracticeLocations('yoga'),
+    [],
+  )
+  const locations = cmsLocations.length > 0 ? cmsLocations : fallbackLocations
 
   return (
     <section className="px-6 py-12">
@@ -32,43 +52,9 @@ export default async function YogaPage() {
       </div>
 
       <div className="mx-auto mt-16 grid max-w-3xl gap-6 sm:grid-cols-2">
-        <div className="flex flex-col rounded-3xl border border-mid/15 bg-white/55 p-8">
-          <h2 className="text-2xl text-deep">NOW Yoga</h2>
-          <p className="mt-1.5 flex items-center gap-1.5 font-sans text-[11px] uppercase tracking-[0.14em] text-mid/70">
-            <MapPin className="h-3.5 w-3.5 text-turq-deep" />
-            Portland
-          </p>
-          <p className="mt-4 flex-1 leading-relaxed text-mid">
-            Weekly group classes in a warm, welcoming community space.
-          </p>
-          <a
-            href={nowYogaUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-6 self-start rounded-full border border-turq-deep px-6 py-2.5 font-sans text-[10px] font-medium uppercase tracking-[0.18em] text-turq-deep transition-colors hover:bg-turq-deep hover:text-cream"
-          >
-            View schedule →
-          </a>
-        </div>
-
-        <div className="flex flex-col rounded-3xl border border-mid/15 bg-white/55 p-8">
-          <h2 className="text-2xl text-deep">YogaSix · Slabtown</h2>
-          <p className="mt-1.5 flex items-center gap-1.5 font-sans text-[11px] uppercase tracking-[0.14em] text-mid/70">
-            <MapPin className="h-3.5 w-3.5 text-turq-deep" />
-            NW Portland
-          </p>
-          <p className="mt-4 flex-1 leading-relaxed text-mid">
-            Heated and flowing group classes at the Slabtown studio.
-          </p>
-          <a
-            href={yogaSixUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-6 self-start rounded-full border border-turq-deep px-6 py-2.5 font-sans text-[10px] font-medium uppercase tracking-[0.18em] text-turq-deep transition-colors hover:bg-turq-deep hover:text-cream"
-          >
-            View schedule →
-          </a>
-        </div>
+        {locations.map((loc) => (
+          <LocationCard key={loc._id} location={loc} />
+        ))}
       </div>
     </section>
   )

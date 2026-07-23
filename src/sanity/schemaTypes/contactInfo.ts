@@ -14,20 +14,6 @@ export const contactInfo = defineType({
         "Molly's MassageBook booking page link (the one from her Instagram bio). Powers the “Book a session” button in the massage hero. Note: the embedded yurt scheduler is set up in the site code — you don’t add it here.",
     }),
     defineField({
-      name: 'nowYogaUrl',
-      title: 'NOW Yoga — Schedule Link',
-      type: 'url',
-      description:
-        "Link for the NOW Yoga 'View schedule' button on /yoga. Defaults to nowyogapdx.com/schedule if left blank.",
-    }),
-    defineField({
-      name: 'yogaSixUrl',
-      title: 'YogaSix — Slabtown URL',
-      type: 'url',
-      description:
-        "Link to Molly's YogaSix Slabtown location/schedule page. Powers the YogaSix card on /yoga. Defaults to the Slabtown location page if left blank.",
-    }),
-    defineField({
       name: 'phone',
       title: 'Phone',
       type: 'string',

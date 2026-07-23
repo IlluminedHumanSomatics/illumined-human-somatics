@@ -80,37 +80,6 @@ export const homePage = defineType({
         defineField({ name: 'href', title: 'Link', type: 'string' }),
       ],
     }),
-    defineField({
-      name: 'spaceHeading',
-      title: 'The Space — Heading',
-      type: 'string',
-      description: 'Heading for the "The Space" (yurt) section.',
-    }),
-    defineField({
-      name: 'spaceBody',
-      title: 'The Space — Text',
-      type: 'text',
-      rows: 4,
-    }),
-    defineField({
-      name: 'spaceVideo',
-      title: 'The Space — Video',
-      type: 'file',
-      options: { accept: 'video/*' },
-      description:
-        'Short looping yurt clip (trimmed & compressed — ideally under ~10 MB). Plays muted and silent.',
-    }),
-    defineField({
-      name: 'spacePoster',
-      title: 'The Space — Poster Image',
-      type: 'image',
-      options: { hotspot: true },
-      description:
-        'Still shown on mobile, while the video loads, and for reduced motion.',
-      fields: [
-        defineField({ name: 'alt', title: 'Alt text', type: 'string' }),
-      ],
-    }),
   ],
   preview: {
     select: { title: 'heading' },

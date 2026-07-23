@@ -13,6 +13,12 @@ export const structure: StructureResolver = (S) =>
         .id('homePage')
         .child(S.document().schemaType('homePage').documentId('homePage')),
       S.listItem()
+        .title('Massage Page')
+        .id('massagePage')
+        .child(
+          S.document().schemaType('massagePage').documentId('massagePage'),
+        ),
+      S.listItem()
         .title('About Page')
         .id('about')
         .child(S.document().schemaType('about').documentId('about')),
@@ -24,6 +30,9 @@ export const structure: StructureResolver = (S) =>
         ),
       S.divider(),
       // ── Collections ────────────────────────────────────────
+      S.documentTypeListItem('practiceLocation').title(
+        'Massage & Yoga Locations',
+      ),
       S.documentTypeListItem('workshop').title('Retreats & Workshops'),
       S.documentTypeListItem('testimonial').title('Testimonials'),
     ])

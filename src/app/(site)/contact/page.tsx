@@ -2,20 +2,12 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { getContactInfo } from '@/lib/sanity'
 import type { ContactInfo } from '@/lib/types'
+import { MapPin } from '@/components/MapPin'
 
 export const metadata: Metadata = {
   title: 'Contact · Illumined Human Somatics',
   description:
     'Get in touch with Molly Dilg — book a massage or yoga session, or say hello by email or Instagram in Portland, Oregon.',
-}
-
-function MapPin() {
-  return (
-    <svg viewBox="0 0 24 24" className="h-5 w-5 shrink-0 text-turq-deep" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <path d="M12 21s-6-5.686-6-10a6 6 0 1 1 12 0c0 4.314-6 10-6 10Z" />
-      <circle cx="12" cy="11" r="2" />
-    </svg>
-  )
 }
 
 function MailIcon() {
@@ -108,7 +100,7 @@ export default async function ContactPage() {
             {instagramHandle}
           </a>
           <div className="inline-flex items-center gap-3 text-base text-mid">
-            <MapPin />
+            <MapPin className="h-5 w-5 text-turq-deep" />
             {location}
           </div>
         </div>

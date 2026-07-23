@@ -1,16 +1,9 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { getHomePage, getAbout, getTestimonials, urlFor } from '@/lib/sanity'
+import { safe } from '@/lib/safe'
 import { SunMotif } from '@/components/SunMotif'
 import { PatternDivider } from '@/components/PatternDivider'
-
-async function safe<T>(promise: Promise<T>, fallback: T): Promise<T> {
-  try {
-    return await promise
-  } catch {
-    return fallback
-  }
-}
 
 // Seeded from MassageBook until reviews are added in the CMS.
 const fallbackTestimonials = [

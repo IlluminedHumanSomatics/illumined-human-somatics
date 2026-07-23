@@ -1,24 +1,7 @@
 import Link from 'next/link'
 import { getContactInfo } from '@/lib/sanity'
 import type { ContactInfo } from '@/lib/types'
-
-function MapPin() {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      className="h-[18px] w-[18px] shrink-0 text-turq-deep"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-    >
-      <path d="M12 21s-6-5.686-6-10a6 6 0 1 1 12 0c0 4.314-6 10-6 10Z" />
-      <circle cx="12" cy="11" r="2" />
-    </svg>
-  )
-}
+import { MapPin } from '@/components/MapPin'
 
 function InstagramIcon() {
   return (
@@ -144,7 +127,7 @@ export async function SiteFooter() {
             <InstagramIcon />
           </a>
           <div className="mt-5 flex items-center gap-2.5 text-base text-cream">
-            <MapPin />
+            <MapPin className="h-[18px] w-[18px] text-turq-deep" />
             {location}
           </div>
         </div>

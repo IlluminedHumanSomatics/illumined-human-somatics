@@ -2,6 +2,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import type { Metadata } from 'next'
 import { getAbout, urlFor } from '@/lib/sanity'
+import { safe } from '@/lib/safe'
 import type { About, SanityImage } from '@/lib/types'
 import { PatternDivider } from '@/components/PatternDivider'
 import { FadeIn } from '@/components/FadeIn'
@@ -10,14 +11,6 @@ export const metadata: Metadata = {
   title: 'About · Illumined Human Somatics',
   description:
     'Meet Molly Dilg — somatic massage, private yoga, and psychosomatic coaching in Portland, Oregon.',
-}
-
-async function safe<T>(promise: Promise<T>, fallback: T): Promise<T> {
-  try {
-    return await promise
-  } catch {
-    return fallback
-  }
 }
 
 const tagline = 'I add light through grounded gratitude and empathic inquiry.'

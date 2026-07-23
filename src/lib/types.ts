@@ -36,10 +36,13 @@ export interface HomePage {
   backgroundPoster?: SanityImage
   primaryCta?: CtaLink
   secondaryCta?: CtaLink
-  spaceHeading?: string
-  spaceBody?: string
-  spaceVideoUrl?: string
-  spacePoster?: SanityImage
+}
+
+export interface MassagePage {
+  _id: string
+  _type: 'massagePage'
+  heroVideoUrl?: string
+  heroPoster?: SanityImage
 }
 
 export interface Testimonial {
@@ -97,12 +100,22 @@ export interface About {
   yearsOfPractice?: number
 }
 
+export interface PracticeLocation {
+  _id: string
+  _type: 'practiceLocation'
+  name: string
+  page: 'massage' | 'yoga'
+  area?: string
+  description?: string
+  linkLabel?: string
+  linkUrl?: string
+  displayOrder?: number
+}
+
 export interface ContactInfo {
   _id: string
   _type: 'contactInfo'
   bookingUrl?: string
-  nowYogaUrl?: string
-  yogaSixUrl?: string
   phone?: string
   email?: string
   locationDescription?: string
