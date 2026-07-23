@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { getContactInfo, getHomePage, urlFor } from '@/lib/sanity'
 import type { ContactInfo, HomePage } from '@/lib/types'
 import { HeroVideo } from '@/components/HeroVideo'
+import { MapPin } from '@/components/MapPin'
 
 export const metadata: Metadata = {
   title: 'Massage · Illumined Human Somatics',
@@ -62,36 +63,48 @@ export default async function MassagePage() {
         </div>
       </section>
 
-      {/* ── Where to book (3 locations) ──────────────────────── */}
-      <section className="px-6 pb-20 pt-16">
+      {/* ── The Yurt — book right here (embedded scheduler) ──── */}
+      <section id="book-yurt" className="px-6 pb-20 pt-16">
         <div className="mx-auto max-w-2xl text-center">
-          <h2 className="text-3xl text-deep sm:text-4xl">Where to book</h2>
+          <p className="flex items-center justify-center gap-1.5 font-sans text-[11px] font-medium uppercase tracking-[0.2em] text-turq-deep">
+            <MapPin className="h-4 w-4" />
+            The Yurt · Portland
+          </p>
+          <h2 className="mt-4 text-3xl text-deep sm:text-4xl">
+            Book your session in the yurt
+          </h2>
+          <p className="mx-auto mt-4 max-w-xl leading-relaxed text-mid">
+            Somatic massage &amp; bodywork in the hand-crafted yurt, or Molly can
+            travel to you. Choose a service and time below to book directly with
+            her.
+          </p>
+        </div>
+        <div className="mx-auto mt-10 max-w-3xl overflow-hidden rounded-3xl border border-mid/15 bg-white/70">
+          <iframe
+            src="https://www.massagebook.com/therapists/illumined-human-somatics/widget/services"
+            title="Book a massage with Molly in the yurt"
+            loading="lazy"
+            className="block w-full"
+            style={{ height: 600, border: 0 }}
+          />
+        </div>
+      </section>
+
+      {/* ── Also find Molly at (the other two locations) ─────── */}
+      <section className="border-t border-mid/10 px-6 pb-24 pt-16">
+        <div className="mx-auto max-w-2xl text-center">
+          <h2 className="text-3xl text-deep sm:text-4xl">Also find Molly at</h2>
+          <p className="mx-auto mt-4 max-w-md leading-relaxed text-mid">
+            Molly also offers bodywork at two other Portland spaces.
+          </p>
         </div>
 
-        <div className="mx-auto mt-10 grid max-w-5xl gap-6 sm:grid-cols-3">
-          {/* The Yurt */}
-          <div className="flex flex-col rounded-3xl border border-mid/15 bg-white/55 p-8">
-            <h3 className="text-2xl text-deep">The Yurt</h3>
-            <p className="mt-1 font-sans text-[11px] uppercase tracking-[0.14em] text-mid/70">
-              Portland
-            </p>
-            <p className="mt-4 flex-1 leading-relaxed text-mid">
-              Somatic massage &amp; bodywork in the hand-crafted yurt.
-            </p>
-            <a
-              href={bookingUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-6 self-start rounded-full bg-orange px-6 py-2.5 font-sans text-[10px] font-medium uppercase tracking-[0.18em] text-cream transition-colors hover:bg-deep"
-            >
-              Book a session →
-            </a>
-          </div>
-
+        <div className="mx-auto mt-10 grid max-w-3xl gap-6 sm:grid-cols-2">
           {/* Yomassage */}
           <div className="flex flex-col rounded-3xl border border-mid/15 bg-white/55 p-8">
             <h3 className="text-2xl text-deep">Yomassage</h3>
-            <p className="mt-1 font-sans text-[11px] uppercase tracking-[0.14em] text-mid/70">
+            <p className="mt-1.5 flex items-center gap-1.5 font-sans text-[11px] uppercase tracking-[0.14em] text-mid/70">
+              <MapPin className="h-3.5 w-3.5 text-turq-deep" />
               Portland
             </p>
             <p className="mt-4 flex-1 leading-relaxed text-mid">
@@ -108,7 +121,8 @@ export default async function MassagePage() {
           {/* Written on the Body */}
           <div className="flex flex-col rounded-3xl border border-mid/15 bg-white/55 p-8">
             <h3 className="text-2xl text-deep">Written on the Body</h3>
-            <p className="mt-1 font-sans text-[11px] uppercase tracking-[0.14em] text-mid/70">
+            <p className="mt-1.5 flex items-center gap-1.5 font-sans text-[11px] uppercase tracking-[0.14em] text-mid/70">
+              <MapPin className="h-3.5 w-3.5 text-turq-deep" />
               Portland · Wednesdays
             </p>
             <p className="mt-4 flex-1 leading-relaxed text-mid">
@@ -126,7 +140,6 @@ export default async function MassagePage() {
           </div>
         </div>
       </section>
-
     </>
   )
 }

@@ -114,13 +114,13 @@ export default async function AboutPage() {
             </div>
           )}
           <div>
-            <div className="flex items-center gap-2.5">
-              <span className="h-1.5 w-1.5 rounded-full bg-orange" />
+            <div className="flex items-center gap-3">
+              <span className="h-px w-8 bg-orange/70" />
               <span className="font-sans text-[10px] font-light uppercase tracking-[0.28em] text-orange">
                 About {about?.fullName ?? 'Molly'}
               </span>
             </div>
-            <h1 className="mt-5 max-w-[22ch] text-balance text-3xl leading-[1.18] text-deep sm:text-4xl">
+            <h1 className="mt-5 max-w-[18ch] text-balance text-3xl leading-[1.18] text-deep sm:text-4xl">
               I add <em className="italic text-orange">light</em> through
               grounded gratitude and empathic inquiry.
             </h1>
@@ -129,7 +129,7 @@ export default async function AboutPage() {
             </p>
             <Link
               href="/massage"
-              className="mt-8 inline-block rounded-full bg-orange px-7 py-3 font-sans text-[11px] font-light uppercase tracking-[0.22em] text-cream transition-colors hover:bg-deep"
+              className="mt-8 mx-auto block w-fit rounded-full bg-orange px-7 py-3 font-sans text-[11px] font-light uppercase tracking-[0.22em] text-cream transition-colors hover:bg-deep md:mx-0"
             >
               Book a session
             </Link>

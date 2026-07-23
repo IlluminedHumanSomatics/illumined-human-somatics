@@ -8,17 +8,10 @@ export const contactInfo = defineType({
   fields: [
     defineField({
       name: 'bookingUrl',
-      title: 'MassageBook Booking URL',
+      title: 'MassageBook Booking Link',
       type: 'url',
       description:
-        'Your MassageBook booking page URL (from Business → Setup → Widgets for Your Website). Powers the embedded scheduler on /book and every "Book" button.',
-    }),
-    defineField({
-      name: 'mindbodyScheduleUrl',
-      title: 'NOW Yoga — Mindbody Schedule URL',
-      type: 'url',
-      description:
-        "Mindbody Branded Web Tools schedule widget (iframe URL), filtered to Molly's classes. Powers the embedded group-class schedule on /classes. Provided by NOW Yoga.",
+        "Molly's MassageBook booking page link (the one from her Instagram bio). Powers the “Book a session” button in the massage hero. Note: the embedded yurt scheduler is set up in the site code — you don’t add it here.",
     }),
     defineField({
       name: 'nowYogaUrl',
@@ -60,4 +53,7 @@ export const contactInfo = defineType({
       type: 'url',
     }),
   ],
+  preview: {
+    prepare: () => ({ title: 'Contact & Booking Links' }),
+  },
 })

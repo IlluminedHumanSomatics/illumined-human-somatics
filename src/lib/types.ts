@@ -101,7 +101,6 @@ export interface ContactInfo {
   _id: string
   _type: 'contactInfo'
   bookingUrl?: string
-  mindbodyScheduleUrl?: string
   nowYogaUrl?: string
   yogaSixUrl?: string
   phone?: string
