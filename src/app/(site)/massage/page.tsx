@@ -101,9 +101,9 @@ export default async function MassagePage() {
             Book your session in the yurt
           </h2>
           <p className="mx-auto mt-4 max-w-xl leading-relaxed text-mid">
-            Somatic massage &amp; bodywork in the hand-crafted yurt, or Molly can
-            travel to you. Choose a service and time below to book directly with
-            her.
+            Somatic massage &amp; bodywork in the hand-crafted yurt, including
+            couples massage for two. Molly can also travel to you. Choose a
+            service and time below to book directly with her.
           </p>
         </div>
         <div className="mx-auto mt-10 max-w-3xl overflow-hidden rounded-3xl border border-mid/15 bg-white/70">

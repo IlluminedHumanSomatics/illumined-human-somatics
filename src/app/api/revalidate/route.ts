@@ -8,7 +8,8 @@ import { parseBody } from 'next-sanity/webhook'
  * Set up in Sanity (manage.sanity.io → API → Webhooks):
  *   URL:     https://<your-domain>/api/revalidate
  *   Trigger: Create, Update, Delete
- *   Filter:  _type in ["homePage","about","contactInfo","workshop","testimonial","service"]
+ *   Filter:  _type in ["homePage","massagePage","about","contactInfo","workshop","testimonial","service","practiceLocation"]
+ *           (or leave the filter empty to revalidate on ANY document change)
  *   Projection: {_type}
  *   Secret:  same value as the SANITY_REVALIDATE_SECRET env var
  *
