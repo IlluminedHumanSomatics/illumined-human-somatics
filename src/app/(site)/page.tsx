@@ -48,9 +48,7 @@ export default async function HomePage() {
   const benefit =
     home?.subheading ??
     'Hands-on bodywork to help you feel calm, open, and at home in your body.'
-  const intro =
-    home?.intro ??
-    'Illumined Human Somatics is built on a foundation of health in wholeness rather than reduction to parts. Inquiry and invitation are used to assess the nervous system, heart, mind, and body to create a comprehensive treatment plan aimed at adding harmony, resonance, and resplendence to the whole self.'
+  const intro = home?.intro
   const ceilingUrl = home?.ceilingImage
     ? urlFor(home.ceilingImage).width(1920).quality(85).url()
     : undefined
@@ -114,7 +112,9 @@ export default async function HomePage() {
       {/* ── Intro / orientation ──────────────────────────────── */}
       <section className="px-6 pb-10 pt-6">
         <div className="mx-auto max-w-2xl text-center">
-          <p className="text-lg leading-relaxed text-mid sm:text-xl">{intro}</p>
+          {intro && (
+            <p className="text-lg leading-relaxed text-mid sm:text-xl">{intro}</p>
+          )}
           <p className="mt-6 font-sans text-[11px] font-light uppercase tracking-[0.22em] text-mid">
             alignment
             <span className="mx-3 text-turq" aria-hidden="true">✦</span>
