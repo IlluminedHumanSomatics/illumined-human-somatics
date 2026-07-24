@@ -18,7 +18,8 @@ export async function getHomePage(): Promise<HomePage | null> {
     `*[_type == "homePage"][0]{
       _id, _type, eyebrow, heading, subheading, intro, ceilingImage,
       "videoUrl": backgroundVideo.asset->url,
-      backgroundPoster, primaryCta, secondaryCta
+      backgroundPoster, primaryCta, secondaryCta,
+      aboutTeaserHeading, aboutTeaserText
     }`,
     {},
     { next: { tags: ['homePage'], revalidate: 3600 } },

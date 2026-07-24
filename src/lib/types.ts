@@ -36,6 +36,8 @@ export interface HomePage {
   backgroundPoster?: SanityImage
   primaryCta?: CtaLink
   secondaryCta?: CtaLink
+  aboutTeaserHeading?: string
+  aboutTeaserText?: string
 }
 
 export interface MassagePage {

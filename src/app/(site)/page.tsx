@@ -226,17 +226,16 @@ export default async function HomePage() {
                 {about?.fullName ? `About ${about.fullName.split(' ')[0]}` : 'About Molly'}
               </span>
             </div>
-            <h2 className="mt-4 text-4xl leading-[1.05] text-deep">
-              A guide back to
-              <br />
-              your own <em className="italic text-orange">body</em>
-            </h2>
-            <p className="mt-6 max-w-md leading-loose text-mid">
-              Rooted in somatic practice, yoga, and years of hands-on bodywork,
-              Molly creates space for the kind of healing that happens when a
-              body feels truly safe. Every session is an invitation — not a
-              prescription.
-            </p>
+            {home?.aboutTeaserHeading && (
+              <h2 className="mt-4 text-4xl leading-[1.05] text-deep">
+                {home.aboutTeaserHeading}
+              </h2>
+            )}
+            {home?.aboutTeaserText && (
+              <p className="mt-6 max-w-md leading-loose text-mid">
+                {home.aboutTeaserText}
+              </p>
+            )}
             <Link
               href="/about"
               className="mt-7 inline-block border-b border-orange/30 pb-1 font-sans text-[10px] font-light uppercase tracking-[0.2em] text-orange transition-opacity hover:opacity-60"

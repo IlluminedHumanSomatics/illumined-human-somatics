@@ -80,6 +80,21 @@ export const homePage = defineType({
         defineField({ name: 'href', title: 'Link', type: 'string' }),
       ],
     }),
+    defineField({
+      name: 'aboutTeaserHeading',
+      title: 'About Teaser — Heading',
+      type: 'string',
+      description:
+        'Heading for the "About Molly" preview near the bottom of the home page (next to her photo).',
+    }),
+    defineField({
+      name: 'aboutTeaserText',
+      title: 'About Teaser — Text',
+      type: 'text',
+      rows: 4,
+      description:
+        "Short blurb under that heading, above the “Read Molly’s story” link.",
+    }),
   ],
   preview: {
     select: { title: 'heading' },
