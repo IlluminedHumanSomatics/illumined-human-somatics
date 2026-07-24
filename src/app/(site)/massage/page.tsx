@@ -111,8 +111,7 @@ export default async function MassagePage() {
             src="https://www.massagebook.com/therapists/illumined-human-somatics/widget/services"
             title="Book a massage with Molly in the yurt"
             loading="lazy"
-            className="block w-full"
-            style={{ height: 600, border: 0 }}
+            className="block h-[630px] w-full border-0"
           />
         </div>
       </section>
