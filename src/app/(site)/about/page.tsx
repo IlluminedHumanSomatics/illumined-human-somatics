@@ -56,7 +56,6 @@ function FloatPhoto({
           sizes="(min-width: 640px) 224px, 66vw"
           className="object-cover"
         />
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-orange/10 via-transparent to-yellow/10" />
       </div>
     </FadeIn>
   )
@@ -74,7 +73,6 @@ function FeatureImage({ image }: { image: SanityImage }) {
           sizes="(min-width: 672px) 672px, 100vw"
           className="object-cover"
         />
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-orange/[0.10] via-transparent to-yellow/10" />
       </figure>
     </FadeIn>
   )
@@ -99,7 +97,6 @@ export default async function AboutPage() {
                 sizes="(min-width: 768px) 272px, 100vw"
                 className="rounded-3xl object-cover"
               />
-              <div className="pointer-events-none absolute inset-0 rounded-3xl bg-gradient-to-tr from-orange/10 via-transparent to-yellow/10" />
             </div>
           ) : (
             <div className="mx-auto flex aspect-[3/4] w-full max-w-[17rem] items-center justify-center rounded-3xl border border-orange/15 bg-gradient-to-br from-orange/[0.06] to-turq/[0.05] font-sans text-[11px] uppercase tracking-[0.14em] text-mid/30 md:mx-0">
