@@ -69,9 +69,7 @@ export default async function ContactPage() {
 
       {/* ── Reach out ────────────────────────────────────────── */}
       <div className="mx-auto mt-10 max-w-xl rounded-3xl border border-mid/15 bg-white/55 p-10 text-center">
-        <h2 className="text-2xl text-deep">Reach out</h2>
-
-        <div className="mt-7 flex flex-col items-center gap-5">
+        <div className="flex flex-col items-start gap-5">
           {email && (
             <a
               href={`mailto:${email}`}
