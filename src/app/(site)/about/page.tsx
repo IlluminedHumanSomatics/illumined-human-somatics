@@ -50,7 +50,7 @@ function FloatPhoto({
     >
       <div className="relative aspect-[4/5] overflow-hidden rounded-2xl">
         <Image
-          src={urlFor(image).width(560).quality(80).url()}
+          src={urlFor(image).width(600).height(750).quality(82).url()}
           alt={image.alt ?? 'Molly Dilg'}
           fill
           sizes="(min-width: 640px) 224px, 66vw"
