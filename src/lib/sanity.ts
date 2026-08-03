@@ -9,6 +9,7 @@ import type {
   Service,
   Testimonial,
   Workshop,
+  YogaPage,
 } from './types'
 
 export { client, urlFor }
@@ -77,6 +78,14 @@ export async function getMassagePage(): Promise<MassagePage | null> {
     }`,
     {},
     { next: { tags: ['massagePage'], revalidate: 3600 } },
+  )
+}
+
+export async function getYogaPage(): Promise<YogaPage | null> {
+  return client.fetch<YogaPage | null>(
+    `*[_type == "yogaPage"][0]{ _id, _type, heroImage }`,
+    {},
+    { next: { tags: ['yogaPage'], revalidate: 3600 } },
   )
 }
 

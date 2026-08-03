@@ -53,6 +53,12 @@ export interface MassagePage {
   otherText?: string
 }
 
+export interface YogaPage {
+  _id: string
+  _type: 'yogaPage'
+  heroImage?: SanityImage
+}
+
 export interface Testimonial {
   _id: string
   _type: 'testimonial'

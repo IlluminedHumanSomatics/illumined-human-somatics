@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
-import { getPracticeLocations } from '@/lib/sanity'
-import type { PracticeLocation } from '@/lib/types'
+import Image from 'next/image'
+import { getPracticeLocations, getYogaPage, urlFor } from '@/lib/sanity'
+import type { PracticeLocation, YogaPage } from '@/lib/types'
 import { safe } from '@/lib/safe'
 import { LocationCard } from '@/components/LocationCard'
 
@@ -35,17 +36,37 @@ const fallbackLocations: PracticeLocation[] = [
 ]
 
 export default async function YogaPage() {
-  const cmsLocations = await safe<PracticeLocation[]>(
-    getPracticeLocations('yoga'),
-    [],
-  )
+  const [yoga, cmsLocations] = await Promise.all([
+    safe<YogaPage | null>(getYogaPage(), null),
+    safe<PracticeLocation[]>(getPracticeLocations('yoga'), []),
+  ])
   const locations = cmsLocations.length > 0 ? cmsLocations : fallbackLocations
+
+  const heroDrawingUrl = yoga?.heroImage
+    ? urlFor(yoga.heroImage).width(760).quality(85).url()
+    : undefined
 
   return (
     <section className="px-6 py-12">
-      <div className="mx-auto max-w-2xl text-center">
-        <h1 className="text-4xl text-deep sm:text-5xl">Yoga with Molly</h1>
-        <p className="mx-auto mt-5 max-w-md leading-relaxed text-mid">
+      <div className="relative mx-auto max-w-2xl text-center">
+        {heroDrawingUrl && (
+          <div
+            className="pointer-events-none absolute left-1/2 top-1/2 -z-10 w-[300px] max-w-[85%] -translate-x-1/2 -translate-y-1/2 sm:w-[360px]"
+            aria-hidden="true"
+          >
+            <Image
+              src={heroDrawingUrl}
+              alt=""
+              width={760}
+              height={1013}
+              className="h-auto w-full opacity-[0.12] mix-blend-multiply"
+            />
+          </div>
+        )}
+        <h1 className="relative text-4xl text-deep sm:text-5xl">
+          Yoga with Molly
+        </h1>
+        <p className="relative mx-auto mt-5 max-w-md leading-relaxed text-mid">
           Find Molly&rsquo;s group classes at two Portland studios below, and pick
           the one that fits. She also offers private 1:1 yoga sessions.
         </p>
