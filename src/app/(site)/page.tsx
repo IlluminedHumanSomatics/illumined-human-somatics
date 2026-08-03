@@ -93,13 +93,13 @@ export default async function HomePage() {
           <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
             <Link
               href={primary.href ?? '/massage'}
-              className="rounded-full bg-orange px-8 py-3.5 font-sans text-[11px] font-light uppercase tracking-[0.22em] text-cream transition-colors hover:bg-deep"
+              className="rounded-full bg-terra px-8 py-3.5 font-sans text-[11px] font-medium uppercase tracking-[0.22em] text-white transition-colors hover:bg-terra-deep"
             >
               {primary.label}
             </Link>
             <Link
               href={secondary.href ?? '/yoga'}
-              className="rounded-full bg-turq-deep px-8 py-3.5 font-sans text-[11px] font-light uppercase tracking-[0.22em] text-cream transition-colors hover:bg-turq"
+              className="rounded-full bg-turq px-8 py-3.5 font-sans text-[11px] font-medium uppercase tracking-[0.22em] text-white transition-colors hover:bg-turq-deep"
             >
               {secondary.label}
             </Link>
@@ -201,9 +201,11 @@ export default async function HomePage() {
         </div>
       </section>
 
+      <PatternDivider />
+
       {/* ── About teaser ─────────────────────────────────────── */}
-      <section className="border-t border-mid/10">
-        <div className="mx-auto grid max-w-5xl items-center gap-16 px-6 py-24 md:grid-cols-2">
+      <section>
+        <div className="mx-auto grid max-w-5xl items-center gap-16 px-6 pb-14 pt-6 md:grid-cols-2">
           {about?.photo ? (
             <div className="relative aspect-[4/5] overflow-hidden rounded-3xl">
               <Image

@@ -43,8 +43,14 @@ export interface HomePage {
 export interface MassagePage {
   _id: string
   _type: 'massagePage'
+  heroHeading?: string
+  heroSubheading?: string
   heroVideoUrl?: string
   heroPoster?: SanityImage
+  bookingHeading?: string
+  bookingText?: string
+  otherHeading?: string
+  otherText?: string
 }
 
 export interface Testimonial {

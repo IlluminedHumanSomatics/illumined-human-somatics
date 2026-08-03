@@ -1,21 +1,22 @@
 @import "tailwindcss";
 
 @theme {
-  /* ── Warm honey palette (brighter, cozier) ────────────────── */
-  --color-cream: #fbe8ce; /* warm honey cream — page background */
-  --color-deep: #3a2412; /* warm dark brown — headings, dark text */
-  --color-orange: #d96a36; /* sunset coral — primary accent, main CTA */
-  --color-terra: #c0562f; /* terracotta — secondary accent */
-  --color-gold: #e0972c; /* honey gold — rays, dividers */
-  --color-yellow: #efbe5e; /* warm light gold — rays */
-  --color-turq: #46a89b; /* turquoise — jewel accent */
-  --color-turq-deep: #2c807a; /* deep teal */
-  --color-turq-light: #6fc2b5; /* bright teal */
-  --color-mid: #7a4a22; /* readable warm brown — body text */
+  /* ── Direction B: Soft Light & Stillness (matches palette board) ── */
+  --color-cream: #f5ede1; /* warm ivory — airier page background */
+  --color-deep: #4a3b2e; /* warm taupe — headings, dark text */
+  --color-orange: #c98a6a; /* soft dusty terracotta (matches terra) */
+  --color-terra: #c98a6a; /* dusty terracotta — secondary accent */
+  --color-terra-deep: #b0704a; /* slightly deeper terracotta — button hover */
+  --color-gold: #e4b36a; /* soft gold — sunshine, rays, dividers */
+  --color-yellow: #f1d9a9; /* butter — soft sunshine */
+  --color-turq: #6fa79c; /* soft teal — calm / healing accent */
+  --color-turq-deep: #4f8579; /* deeper soft teal — labels */
+  --color-turq-light: #93a996; /* sage — stillness accent */
+  --color-mid: #6a5540; /* warm brown — body text */
 
   /* semantic aliases */
-  --color-background: #fbe8ce;
-  --color-foreground: #3a2412;
+  --color-background: #f5ede1;
+  --color-foreground: #4a3b2e;
 
   /* type families (wired up in layout.tsx via next/font) */
   --font-sans: var(--font-body), ui-sans-serif, system-ui, sans-serif; /* body — Jost */

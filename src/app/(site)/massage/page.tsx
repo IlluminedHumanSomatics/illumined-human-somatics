@@ -59,6 +59,20 @@ export default async function MassagePage() {
     ? urlFor(massage.heroPoster).width(1400).quality(70).url()
     : undefined
 
+  // CMS text with the current copy as fallback (editable in Studio → Massage Page).
+  const heroHeading = massage?.heroHeading ?? 'Somatic massage & bodywork'
+  const heroSubheading =
+    massage?.heroSubheading ??
+    'Therapeutic, attuned bodywork that meets your whole system, in a hand-crafted yurt tucked into the green of Portland.'
+  const bookingHeading =
+    massage?.bookingHeading ?? 'Book your session in the yurt'
+  const bookingText =
+    massage?.bookingText ??
+    'Somatic massage & bodywork in the hand-crafted yurt, including couples massage for two. Molly can also travel to you. Choose a service and time below to book directly with her.'
+  const otherHeading = massage?.otherHeading ?? 'Also find Molly at'
+  const otherText =
+    massage?.otherText ?? 'Molly also offers bodywork at two other Portland spaces.'
+
   return (
     <>
       {/* ── Video hero: text centered over an evenly-dimmed video ── */}
@@ -73,17 +87,16 @@ export default async function MassagePage() {
 
         <div className="relative z-10 max-w-2xl [text-shadow:0_2px_24px_rgba(0,0,0,0.55)]">
           <h1 className="text-balance text-4xl text-white sm:text-6xl">
-            Somatic massage &amp; bodywork
+            {heroHeading}
           </h1>
           <p className="mx-auto mt-6 max-w-lg font-sans text-base font-light leading-relaxed text-white sm:text-lg">
-            Therapeutic, attuned bodywork that meets your whole system, in a
-            hand-crafted yurt tucked into the green of Portland.
+            {heroSubheading}
           </p>
           <a
             href={bookingUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-9 inline-block rounded-full bg-orange px-8 py-3.5 font-sans text-[11px] font-light uppercase tracking-[0.22em] text-cream transition-colors hover:bg-deep"
+            className="mt-9 inline-block rounded-full bg-orange px-8 py-3.5 font-sans text-[11px] font-light uppercase tracking-[0.22em] text-white transition-colors hover:bg-terra-deep"
           >
             Book a session
           </a>
@@ -98,12 +111,10 @@ export default async function MassagePage() {
             The Yurt · Portland
           </p>
           <h2 className="mt-4 text-3xl text-deep sm:text-4xl">
-            Book your session in the yurt
+            {bookingHeading}
           </h2>
           <p className="mx-auto mt-4 max-w-xl leading-relaxed text-mid">
-            Somatic massage &amp; bodywork in the hand-crafted yurt, including
-            couples massage for two. Molly can also travel to you. Choose a
-            service and time below to book directly with her.
+            {bookingText}
           </p>
         </div>
         <div className="mx-auto mt-10 max-w-3xl overflow-hidden rounded-3xl border border-mid/15 bg-white/70">
@@ -119,9 +130,9 @@ export default async function MassagePage() {
       {/* ── Also find Molly at (the other two locations) ─────── */}
       <section className="border-t border-mid/10 px-6 pb-24 pt-16">
         <div className="mx-auto max-w-2xl text-center">
-          <h2 className="text-3xl text-deep sm:text-4xl">Also find Molly at</h2>
+          <h2 className="text-3xl text-deep sm:text-4xl">{otherHeading}</h2>
           <p className="mx-auto mt-4 max-w-md leading-relaxed text-mid">
-            Molly also offers bodywork at two other Portland spaces.
+            {otherText}
           </p>
         </div>
 

@@ -119,7 +119,7 @@ export default async function AboutPage() {
             </p>
             <Link
               href="/massage"
-              className="mt-8 mx-auto block w-fit rounded-full bg-orange px-7 py-3 font-sans text-[11px] font-light uppercase tracking-[0.22em] text-cream transition-colors hover:bg-deep md:mx-0"
+              className="mt-8 mx-auto block w-fit rounded-full bg-orange px-7 py-3 font-sans text-[11px] font-light uppercase tracking-[0.22em] text-white transition-colors hover:bg-terra-deep md:mx-0"
             >
               Book a session
             </Link>

@@ -70,8 +70,11 @@ export async function getMassagePage(): Promise<MassagePage | null> {
   return client.fetch<MassagePage | null>(
     `*[_type == "massagePage"][0]{
       _id, _type,
+      heroHeading, heroSubheading,
       "heroVideoUrl": heroVideo.asset->url,
-      heroPoster
+      heroPoster,
+      bookingHeading, bookingText,
+      otherHeading, otherText
     }`,
     {},
     { next: { tags: ['massagePage'], revalidate: 3600 } },

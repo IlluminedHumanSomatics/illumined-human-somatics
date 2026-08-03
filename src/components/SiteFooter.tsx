@@ -34,14 +34,14 @@ function FooterSunMark() {
       y1: (30 - r1 * Math.cos(a)).toFixed(1),
       x2: (30 + r2 * Math.sin(a)).toFixed(1),
       y2: (30 - r2 * Math.cos(a)).toFixed(1),
-      stroke: i % 3 === 0 ? 'var(--color-turq)' : 'var(--color-gold)',
-      opacity: long ? 0.6 : 0.32,
+      stroke: i % 3 === 0 ? 'var(--color-turq)' : 'var(--color-terra)',
+      opacity: long ? 0.95 : 0.6,
     }
   })
   return (
     <svg
-      width="34"
-      height="34"
+      width="40"
+      height="40"
       viewBox="0 0 60 60"
       className="overflow-visible"
       aria-hidden="true"
@@ -61,9 +61,9 @@ function FooterSunMark() {
           />
         ))}
       </g>
-      <circle cx="30" cy="30" r="9" fill="var(--color-orange)" opacity="0.4" />
-      <circle cx="30" cy="30" r="5.5" fill="var(--color-gold)" opacity="0.6" />
-      <circle cx="30" cy="30" r="3" fill="var(--color-yellow)" opacity="0.9" />
+      <circle cx="30" cy="30" r="9" fill="var(--color-terra)" opacity="0.5" />
+      <circle cx="30" cy="30" r="6" fill="var(--color-orange)" opacity="0.9" />
+      <circle cx="30" cy="30" r="3" fill="var(--color-gold)" opacity="1" />
     </svg>
   )
 }
@@ -83,7 +83,7 @@ export async function SiteFooter() {
   const location = contact?.locationDescription ?? 'Portland, Oregon'
 
   return (
-    <footer className="bg-deep text-cream/90">
+    <footer className="border-t border-deep/10 bg-[#efe3d1] text-mid">
       <div className="mx-auto grid max-w-6xl gap-12 px-6 py-16 sm:px-12 md:grid-cols-2">
         {/* Navigate */}
         <div>
@@ -91,12 +91,12 @@ export async function SiteFooter() {
             Explore
           </h4>
           <ul className="mt-5 flex flex-col gap-3 text-base font-normal">
-            <li><Link href="/about" className="text-cream transition-colors hover:text-turq-deep">About</Link></li>
-            <li><Link href="/massage" className="text-cream transition-colors hover:text-turq-deep">Massage</Link></li>
-            <li><Link href="/yoga" className="text-cream transition-colors hover:text-turq-deep">Yoga</Link></li>
-            <li><Link href="/workshops" className="text-cream transition-colors hover:text-turq-deep">Retreats &amp; Workshops</Link></li>
-            <li><Link href="/contact" className="text-cream transition-colors hover:text-turq-deep">Contact</Link></li>
-            <li><Link href="/massage" className="text-cream transition-colors hover:text-turq-deep">Book</Link></li>
+            <li><Link href="/about" className="text-deep transition-colors hover:text-orange">About</Link></li>
+            <li><Link href="/massage" className="text-deep transition-colors hover:text-orange">Massage</Link></li>
+            <li><Link href="/yoga" className="text-deep transition-colors hover:text-orange">Yoga</Link></li>
+            <li><Link href="/workshops" className="text-deep transition-colors hover:text-orange">Retreats &amp; Workshops</Link></li>
+            <li><Link href="/contact" className="text-deep transition-colors hover:text-orange">Contact</Link></li>
+            <li><Link href="/massage" className="text-deep transition-colors hover:text-orange">Book</Link></li>
           </ul>
         </div>
 
@@ -104,16 +104,16 @@ export async function SiteFooter() {
         <div className="flex flex-col md:items-end md:text-right">
           <div className="flex items-center gap-3">
             <FooterSunMark />
-            <p className="font-display text-3xl tracking-[0.08em] text-cream">
+            <p className="font-display text-3xl tracking-[0.08em] text-deep">
               Illumined Human Somatics
             </p>
           </div>
-          <p className="mt-2 font-display text-lg italic text-turq-deep">
+          <p className="mt-2 font-display text-lg italic text-mid">
             with Molly Dilg
           </p>
           <a
             href={`mailto:${email}`}
-            className="mt-5 text-base text-cream transition-colors hover:text-turq-deep"
+            className="mt-5 text-base text-mid transition-colors hover:text-orange"
           >
             {email}
           </a>
@@ -122,19 +122,19 @@ export async function SiteFooter() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Illumined Human Somatics on Instagram"
-            className="mt-5 inline-flex h-11 w-11 items-center justify-center rounded-full bg-cream/10 text-cream transition-colors hover:bg-turq-deep hover:text-deep"
+            className="mt-5 inline-flex h-11 w-11 items-center justify-center rounded-full bg-turq-deep text-cream transition-colors hover:bg-turq"
           >
             <InstagramIcon />
           </a>
-          <div className="mt-5 flex items-center gap-2.5 text-base text-cream">
+          <div className="mt-5 flex items-center gap-2.5 text-base text-mid">
             <MapPin className="h-[18px] w-[18px] text-turq-deep" />
             {location}
           </div>
         </div>
       </div>
 
-      <div className="border-t border-cream/10">
-        <div className="mx-auto max-w-6xl px-6 py-5 text-center text-[10px] uppercase tracking-[0.12em] text-cream/65 sm:px-12">
+      <div className="border-t border-deep/10">
+        <div className="mx-auto max-w-6xl px-6 py-5 text-center text-[10px] uppercase tracking-[0.12em] text-mid/60 sm:px-12">
           © {new Date().getFullYear()} Illumined Human Somatics
         </div>
       </div>

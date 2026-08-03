@@ -136,14 +136,14 @@ function WorkshopCard({ workshop }: { workshop: FallbackWorkshop }) {
               href={workshop.externalBookingLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="rounded-full bg-orange px-7 py-2.5 font-sans text-[10px] font-medium uppercase tracking-[0.18em] text-cream transition-colors hover:bg-deep"
+              className="rounded-full bg-orange px-7 py-2.5 font-sans text-[10px] font-medium uppercase tracking-[0.18em] text-white transition-colors hover:bg-terra-deep"
             >
               Learn more &amp; reserve →
             </a>
           ) : (
             <Link
               href="/contact"
-              className="rounded-full bg-orange px-7 py-2.5 font-sans text-[10px] font-medium uppercase tracking-[0.18em] text-cream transition-colors hover:bg-deep"
+              className="rounded-full bg-orange px-7 py-2.5 font-sans text-[10px] font-medium uppercase tracking-[0.18em] text-white transition-colors hover:bg-terra-deep"
             >
               Inquire →
             </Link>
