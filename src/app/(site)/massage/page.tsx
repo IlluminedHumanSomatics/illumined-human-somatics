@@ -64,6 +64,7 @@ export default async function MassagePage() {
   const heroSubheading =
     massage?.heroSubheading ??
     'Therapeutic, attuned bodywork that meets your whole system, in a hand-crafted yurt tucked into the green of Portland.'
+  const bookingEyebrow = massage?.bookingEyebrow ?? 'The Yurt · Portland'
   const bookingHeading =
     massage?.bookingHeading ?? 'Book your session in the yurt'
   const bookingText =
@@ -108,7 +109,7 @@ export default async function MassagePage() {
         <div className="mx-auto max-w-2xl text-center">
           <p className="flex items-center justify-center gap-1.5 font-sans text-[11px] font-medium uppercase tracking-[0.2em] text-turq-deep">
             <MapPin className="h-4 w-4" />
-            The Yurt · Portland
+            {bookingEyebrow}
           </p>
           <h2 className="mt-4 text-3xl text-deep sm:text-4xl">
             {bookingHeading}

@@ -73,7 +73,7 @@ export async function getMassagePage(): Promise<MassagePage | null> {
       heroHeading, heroSubheading,
       "heroVideoUrl": heroVideo.asset->url,
       heroPoster,
-      bookingHeading, bookingText,
+      bookingEyebrow, bookingHeading, bookingText,
       otherHeading, otherText
     }`,
     {},

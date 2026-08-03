@@ -46,6 +46,13 @@ export const massagePage = defineType({
       fields: [defineField({ name: 'alt', title: 'Alt text', type: 'string' })],
     }),
     defineField({
+      name: 'bookingEyebrow',
+      title: 'Small label (above heading)',
+      type: 'string',
+      group: 'booking',
+      description: 'The little label above the heading. e.g. "The Yurt · Portland".',
+    }),
+    defineField({
       name: 'bookingHeading',
       title: 'Heading',
       type: 'string',

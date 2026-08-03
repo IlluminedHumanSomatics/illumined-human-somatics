@@ -47,6 +47,7 @@ export interface MassagePage {
   heroSubheading?: string
   heroVideoUrl?: string
   heroPoster?: SanityImage
+  bookingEyebrow?: string
   bookingHeading?: string
   bookingText?: string
   otherHeading?: string
