@@ -27,13 +27,12 @@ export interface CtaLink {
 export interface HomePage {
   _id: string
   _type: 'homePage'
-  eyebrow?: string
   heading?: string
   subheading?: string
+  values?: string[]
   intro?: string
   ceilingImage?: SanityImage
-  videoUrl?: string
-  backgroundPoster?: SanityImage
+  reviewsHeading?: string
   primaryCta?: CtaLink
   secondaryCta?: CtaLink
   aboutTeaserHeading?: string

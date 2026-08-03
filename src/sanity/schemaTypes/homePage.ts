@@ -7,13 +7,6 @@ export const homePage = defineType({
   type: 'document',
   fields: [
     defineField({
-      name: 'eyebrow',
-      title: 'Eyebrow',
-      type: 'string',
-      description:
-        'Small label above the headline, e.g. "Bodywork · Movement · Gathering".',
-    }),
-    defineField({
       name: 'heading',
       title: 'Heading',
       type: 'string',
@@ -25,6 +18,15 @@ export const homePage = defineType({
       title: 'Subheading',
       type: 'text',
       rows: 3,
+    }),
+    defineField({
+      name: 'values',
+      title: 'Values tagline (below the hero)',
+      type: 'array',
+      of: [{ type: 'string' }],
+      description:
+        'Short words shown below the hero, joined with a ✦ (e.g. alignment, alightment, aliveness). Leave blank to use the default three.',
+      validation: (Rule) => Rule.max(5),
     }),
     defineField({
       name: 'intro',
@@ -44,23 +46,11 @@ export const homePage = defineType({
       fields: [defineField({ name: 'alt', title: 'Alt text', type: 'string' })],
     }),
     defineField({
-      name: 'backgroundVideo',
-      title: 'Background Video',
-      type: 'file',
-      options: { accept: 'video/*' },
+      name: 'reviewsHeading',
+      title: 'Reviews — Heading',
+      type: 'string',
       description:
-        'Short looping clip (the yurt). Plays muted and silent — keep it short and compressed (ideally under ~10 MB) for fast loading.',
-    }),
-    defineField({
-      name: 'backgroundPoster',
-      title: 'Background Poster Image',
-      type: 'image',
-      options: { hotspot: true },
-      description:
-        'Still image shown on mobile, while the video loads, and for visitors who prefer reduced motion.',
-      fields: [
-        defineField({ name: 'alt', title: 'Alt text', type: 'string' }),
-      ],
+        'Heading above the reviews. Leave blank to use the default ("What people are saying").',
     }),
     defineField({
       name: 'primaryCta',

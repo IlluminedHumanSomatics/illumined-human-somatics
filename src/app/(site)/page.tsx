@@ -49,6 +49,11 @@ export default async function HomePage() {
     home?.subheading ??
     'Hands-on bodywork to help you feel calm, open, and at home in your body.'
   const intro = home?.intro
+  const values =
+    home?.values && home.values.length > 0
+      ? home.values
+      : ['alignment', 'alightment', 'aliveness']
+  const reviewsHeading = home?.reviewsHeading ?? 'What people are saying'
   const ceilingUrl = home?.ceilingImage
     ? urlFor(home.ceilingImage).width(1920).quality(85).url()
     : undefined
@@ -107,11 +112,14 @@ export default async function HomePage() {
       {/* Practice values — sit in place of the divider below the hero */}
       <div className="px-6 py-8 text-center">
         <p className="font-sans text-[11px] font-light uppercase tracking-[0.22em] text-mid">
-          alignment
-          <span className="mx-3 text-turq" aria-hidden="true">✦</span>
-          alightment
-          <span className="mx-3 text-turq" aria-hidden="true">✦</span>
-          aliveness
+          {values.map((word, i) => (
+            <span key={i}>
+              {i > 0 && (
+                <span className="mx-3 text-turq" aria-hidden="true">✦</span>
+              )}
+              {word}
+            </span>
+          ))}
         </p>
       </div>
 
@@ -155,7 +163,7 @@ export default async function HomePage() {
       {/* ── Reviews ──────────────────────────────────────────── */}
       <section className="px-6 pb-12 pt-8">
         <div className="text-center">
-          <h2 className="text-4xl text-deep sm:text-5xl">What people are saying</h2>
+          <h2 className="text-4xl text-deep sm:text-5xl">{reviewsHeading}</h2>
           <p className="mt-5 font-sans text-sm tracking-[0.04em] text-mid">
             <span className="text-gold">★★★★★</span>&nbsp;&nbsp;5.0 · Verified on
             MassageBook
