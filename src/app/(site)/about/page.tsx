@@ -15,7 +15,6 @@ export const metadata: Metadata = {
 
 const tagline = 'I add light through grounded gratitude and empathic inquiry.'
 
-const storyP = 'mt-8 leading-loose text-mid'
 const dropCap =
   'first-letter:float-left first-letter:mr-3 first-letter:mt-1 first-letter:font-display first-letter:text-[3.4rem] first-letter:font-normal first-letter:leading-[0.7] first-letter:text-orange'
 
@@ -134,6 +133,8 @@ export default async function AboutPage() {
         <div className="mx-auto max-w-2xl px-6">
           <p className={`leading-loose text-mid ${dropCap}`}>{bio[0]}</p>
 
+          {/* One photo per body paragraph, in CMS order, alternating sides.
+              Supports up to 7 story images (bio[0] intro stays photo-free). */}
           <div className="mt-8 flow-root">
             {story[0] && <FloatPhoto image={story[0]} align="right" />}
             <p className="leading-loose text-mid">{bio[1]}</p>
@@ -142,12 +143,19 @@ export default async function AboutPage() {
           <div className="mt-8 flow-root">
             {story[1] && <FloatPhoto image={story[1]} align="left" />}
             <p className="leading-loose text-mid">{bio[2]}</p>
-            <p className="mt-6 leading-loose text-mid">{bio[3]}</p>
+          </div>
+
+          <div className="mt-8 flow-root">
+            {story[2] && <FloatPhoto image={story[2]} align="right" />}
+            <p className="leading-loose text-mid">{bio[3]}</p>
           </div>
 
           {about?.featureImage && <FeatureImage image={about.featureImage} />}
 
-          <p className={storyP}>{bio[4]}</p>
+          <div className="mt-8 flow-root">
+            {story[3] && <FloatPhoto image={story[3]} align="left" />}
+            <p className="leading-loose text-mid">{bio[4]}</p>
+          </div>
 
           <FadeIn>
             <blockquote className="my-10 border-y border-turq/25 py-8 text-center">
@@ -159,17 +167,17 @@ export default async function AboutPage() {
           </FadeIn>
 
           <div className="mt-8 flow-root">
-            {story[2] && <FloatPhoto image={story[2]} align="right" />}
+            {story[4] && <FloatPhoto image={story[4]} align="right" />}
             <p className="leading-loose text-mid">{bio[5]}</p>
           </div>
 
           <div className="mt-8 flow-root">
-            {story[3] && <FloatPhoto image={story[3]} align="left" />}
+            {story[5] && <FloatPhoto image={story[5]} align="left" />}
             <p className="leading-loose text-mid">{bio[6]}</p>
           </div>
 
           <div className="mt-8 flow-root">
-            {story[4] && <FloatPhoto image={story[4]} align="right" />}
+            {story[6] && <FloatPhoto image={story[6]} align="right" />}
             <p className="leading-loose text-mid">{bio[7]}</p>
           </div>
         </div>
