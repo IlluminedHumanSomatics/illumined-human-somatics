@@ -67,7 +67,7 @@ export default async function HomePage() {
   return (
     <>
       {/* ── Hero ─────────────────────────────────────────────── */}
-      <section className="relative flex min-h-[68vh] flex-col items-center justify-center overflow-hidden px-6 py-10">
+      <section className="relative flex min-h-[52vh] flex-col items-center justify-center overflow-hidden px-6 py-6 md:min-h-[68vh] md:py-10">
         {/* Sun as backdrop */}
         <div
           className="pointer-events-none absolute left-1/2 top-1/2 w-[min(680px,95vw)] -translate-x-1/2 -translate-y-1/2"
@@ -150,6 +150,8 @@ export default async function HomePage() {
           )}
           {/* light warm glow (kept subtle so the photo stays sharp) */}
           <div className="pointer-events-none absolute inset-0 bg-[#fbe8ce]/12" />
+          {/* soft cloud-like mist fading down from the top edge */}
+          <div className="pointer-events-none absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-cream/45 via-cream/15 to-transparent" />
           <div className="absolute inset-0 flex items-end justify-center bg-gradient-to-t from-deep/55 via-transparent to-transparent p-8">
             <p className="font-display text-xl italic text-cream drop-shadow sm:text-2xl">
               The view from the massage table.
