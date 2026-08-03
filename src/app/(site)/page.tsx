@@ -81,10 +81,7 @@ export default async function HomePage() {
 
         {/* Words rising into the light */}
         <div className="relative z-10 mx-auto max-w-2xl text-center">
-          <p className="font-sans text-[12px] font-medium uppercase tracking-[0.16em] text-turq-deep">
-            Massage therapy · Private yoga · Integrative psychosomatic coaching
-          </p>
-          <h1 className="mt-8 text-balance text-4xl text-deep sm:text-5xl">
+          <h1 className="text-balance text-4xl text-deep sm:text-5xl">
             {headline}
           </h1>
           <p className="mx-auto mt-6 max-w-md text-lg leading-relaxed text-mid">
@@ -107,21 +104,23 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <PatternDivider />
+      {/* Practice values — sit in place of the divider below the hero */}
+      <div className="px-6 py-8 text-center">
+        <p className="font-sans text-[11px] font-light uppercase tracking-[0.22em] text-mid">
+          alignment
+          <span className="mx-3 text-turq" aria-hidden="true">✦</span>
+          alightment
+          <span className="mx-3 text-turq" aria-hidden="true">✦</span>
+          aliveness
+        </p>
+      </div>
 
       {/* ── Intro / orientation ──────────────────────────────── */}
-      <section className="px-6 pb-10 pt-6">
+      <section className="px-6 pb-10">
         <div className="mx-auto max-w-2xl text-center">
           {intro && (
             <p className="text-lg leading-relaxed text-mid sm:text-xl">{intro}</p>
           )}
-          <p className="mt-6 font-sans text-[11px] font-light uppercase tracking-[0.22em] text-mid">
-            alignment
-            <span className="mx-3 text-turq" aria-hidden="true">✦</span>
-            alightment
-            <span className="mx-3 text-turq" aria-hidden="true">✦</span>
-            aliveness
-          </p>
         </div>
       </section>
 
@@ -145,7 +144,7 @@ export default async function HomePage() {
           <div className="pointer-events-none absolute inset-0 bg-[#fbe8ce]/12" />
           <div className="absolute inset-0 flex items-end justify-center bg-gradient-to-t from-deep/55 via-transparent to-transparent p-8">
             <p className="font-display text-xl italic text-cream drop-shadow sm:text-2xl">
-              The view from the table.
+              The view from the massage table.
             </p>
           </div>
         </div>
@@ -154,7 +153,7 @@ export default async function HomePage() {
       <PatternDivider />
 
       {/* ── Reviews ──────────────────────────────────────────── */}
-      <section className="px-6 pb-24 pt-8">
+      <section className="px-6 pb-12 pt-8">
         <div className="text-center">
           <h2 className="text-4xl text-deep sm:text-5xl">What people are saying</h2>
           <p className="mt-5 font-sans text-sm tracking-[0.04em] text-mid">
@@ -207,9 +206,9 @@ export default async function HomePage() {
       <section>
         <div className="mx-auto grid max-w-5xl items-center gap-16 px-6 pb-14 pt-6 md:grid-cols-2">
           {about?.photo ? (
-            <div className="relative aspect-[4/5] overflow-hidden rounded-3xl">
+            <div className="relative aspect-square overflow-hidden rounded-3xl">
               <Image
-                src={urlFor(about.photo).width(800).height(1000).url()}
+                src={urlFor(about.photo).width(900).height(900).url()}
                 alt={about.photo.alt ?? about.fullName}
                 fill
                 sizes="(min-width: 768px) 50vw, 100vw"
@@ -217,7 +216,7 @@ export default async function HomePage() {
               />
             </div>
           ) : (
-            <div className="flex aspect-[4/5] items-center justify-center border border-orange/15 bg-gradient-to-br from-orange/[0.06] to-turq/[0.05] font-sans text-[11px] uppercase tracking-[0.14em] text-mid/30">
+            <div className="flex aspect-square items-center justify-center border border-orange/15 bg-gradient-to-br from-orange/[0.06] to-turq/[0.05] font-sans text-[11px] uppercase tracking-[0.14em] text-mid/30">
               Molly&rsquo;s photo
             </div>
           )}

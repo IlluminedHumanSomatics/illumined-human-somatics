@@ -117,6 +117,10 @@ export async function SiteFooter() {
           >
             {email}
           </a>
+          <div className="mt-5 flex items-center gap-2.5 text-base text-mid">
+            <MapPin className="h-[18px] w-[18px] text-turq-deep" />
+            {location}
+          </div>
           <a
             href={instagramUrl}
             target="_blank"
@@ -126,10 +130,6 @@ export async function SiteFooter() {
           >
             <InstagramIcon />
           </a>
-          <div className="mt-5 flex items-center gap-2.5 text-base text-mid">
-            <MapPin className="h-[18px] w-[18px] text-turq-deep" />
-            {location}
-          </div>
         </div>
       </div>
 
