@@ -42,7 +42,7 @@ export function HeroVideo({ videoUrl, posterUrl, alt }: HeroVideoProps) {
           fill
           priority
           sizes="100vw"
-          className="object-contain md:object-cover"
+          className="object-cover"
         />
       )
     }
@@ -55,7 +55,7 @@ export function HeroVideo({ videoUrl, posterUrl, alt }: HeroVideoProps) {
   return (
     <video
       ref={videoRef}
-      className="absolute inset-0 h-full w-full object-contain md:object-cover"
+      className="absolute inset-0 h-full w-full object-cover"
       autoPlay
       muted
       loop

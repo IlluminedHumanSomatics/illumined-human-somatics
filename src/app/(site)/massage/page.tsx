@@ -77,7 +77,7 @@ export default async function MassagePage() {
   return (
     <>
       {/* ── Video hero: text centered over an evenly-dimmed video ── */}
-      <section className="relative flex min-h-[540px] w-full flex-col items-center justify-center overflow-hidden bg-deep px-6 py-20 text-center md:h-[78vh]">
+      <section className="relative flex min-h-[440px] w-full flex-col items-center justify-center overflow-hidden px-6 py-16 text-center md:h-[78vh] md:py-20">
         <HeroVideo
           videoUrl={massage?.heroVideoUrl}
           posterUrl={heroPosterUrl}
