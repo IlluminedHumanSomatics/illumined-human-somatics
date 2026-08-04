@@ -42,37 +42,42 @@ export default async function YogaPage() {
   ])
   const locations = cmsLocations.length > 0 ? cmsLocations : fallbackLocations
 
+  // CMS text with the current copy as fallback (editable in Studio → Yoga Page).
+  const heroHeading = yoga?.heroHeading ?? 'Yoga with Molly'
+  const heroText =
+    yoga?.heroText ??
+    'Find Molly’s group classes at two Portland studios below, and pick the one that fits. She also offers private 1:1 yoga sessions.'
+
+  // Crop tight to the figure — the drawing sits centered on a large,
+  // mostly-transparent canvas, so a rect crop keeps it from rendering small.
   const heroDrawingUrl = yoga?.heroImage
-    ? urlFor(yoga.heroImage).width(760).quality(85).url()
+    ? urlFor(yoga.heroImage)
+        .rect(1287, 460, 2196, 2932)
+        .width(560)
+        .quality(90)
+        .url()
     : undefined
 
   return (
-    <section className="px-6 py-12">
-      <div className="relative mx-auto max-w-2xl text-center">
+    <section className="px-6 py-10">
+      <div className="mx-auto flex max-w-4xl flex-col items-center gap-8 md:flex-row md:justify-center md:gap-16">
+        <div className="max-w-md text-center md:text-left">
+          <h1 className="text-4xl text-deep sm:text-5xl">{heroHeading}</h1>
+          <p className="mt-5 leading-relaxed text-mid">{heroText}</p>
+        </div>
         {heroDrawingUrl && (
-          <div
-            className="pointer-events-none absolute left-1/2 top-1/2 -z-10 w-[300px] max-w-[85%] -translate-x-1/2 -translate-y-1/2 sm:w-[360px]"
+          <Image
+            src={heroDrawingUrl}
+            alt=""
+            width={560}
+            height={748}
             aria-hidden="true"
-          >
-            <Image
-              src={heroDrawingUrl}
-              alt=""
-              width={760}
-              height={1013}
-              className="h-auto w-full opacity-[0.12] mix-blend-multiply"
-            />
-          </div>
+            className="w-[175px] shrink-0 sm:w-[200px]"
+          />
         )}
-        <h1 className="relative text-4xl text-deep sm:text-5xl">
-          Yoga with Molly
-        </h1>
-        <p className="relative mx-auto mt-5 max-w-md leading-relaxed text-mid">
-          Find Molly&rsquo;s group classes at two Portland studios below, and pick
-          the one that fits. She also offers private 1:1 yoga sessions.
-        </p>
       </div>
 
-      <div className="mx-auto mt-16 grid max-w-3xl gap-6 sm:grid-cols-2">
+      <div className="mx-auto mt-12 grid max-w-3xl gap-6 sm:grid-cols-2">
         {locations.map((loc) => (
           <LocationCard key={loc._id} location={loc} />
         ))}

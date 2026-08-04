@@ -83,7 +83,7 @@ export async function getMassagePage(): Promise<MassagePage | null> {
 
 export async function getYogaPage(): Promise<YogaPage | null> {
   return client.fetch<YogaPage | null>(
-    `*[_type == "yogaPage"][0]{ _id, _type, heroImage }`,
+    `*[_type == "yogaPage"][0]{ _id, _type, heroHeading, heroText, heroImage }`,
     {},
     { next: { tags: ['yogaPage'], revalidate: 3600 } },
   )

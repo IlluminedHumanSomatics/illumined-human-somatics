@@ -7,12 +7,26 @@ export const yogaPage = defineType({
   type: 'document',
   fields: [
     defineField({
+      name: 'heroHeading',
+      title: 'Heading',
+      type: 'string',
+      description:
+        'Leave blank to use the default ("Yoga with Molly").',
+    }),
+    defineField({
+      name: 'heroText',
+      title: 'Text',
+      type: 'text',
+      rows: 3,
+      description: 'The paragraph under the heading.',
+    }),
+    defineField({
       name: 'heroImage',
-      title: 'Hero Background Drawing',
+      title: 'Hero Drawing',
       type: 'image',
       options: { hotspot: true },
       description:
-        'A line drawing shown softly faded behind the "Yoga with Molly" heading. Leave blank for no illustration. A tall/portrait drawing on a plain white background works best.',
+        'Line drawing shown to the right of the heading. Leave blank for no illustration.',
       fields: [defineField({ name: 'alt', title: 'Alt text', type: 'string' })],
     }),
   ],

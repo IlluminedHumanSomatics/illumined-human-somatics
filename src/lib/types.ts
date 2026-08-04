@@ -56,6 +56,8 @@ export interface MassagePage {
 export interface YogaPage {
   _id: string
   _type: 'yogaPage'
+  heroHeading?: string
+  heroText?: string
   heroImage?: SanityImage
 }
 
