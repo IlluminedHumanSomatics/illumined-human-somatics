@@ -231,8 +231,8 @@ export default async function HomePage() {
             </div>
           )}
           <div>
-            <div className="flex items-center gap-2.5">
-              <span className="h-1.5 w-1.5 rounded-full bg-orange" />
+            <div className="flex items-center gap-3">
+              <span className="h-px w-8 bg-orange/70" />
               <span className="font-sans text-[10px] font-light uppercase tracking-[0.28em] text-orange">
                 {about?.fullName ? `About ${about.fullName.split(' ')[0]}` : 'About Molly'}
               </span>
