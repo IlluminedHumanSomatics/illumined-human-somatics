@@ -1,11 +1,13 @@
 import Image from 'next/image'
 import Link from 'next/link'
+import { Fragment } from 'react'
 import type { Metadata } from 'next'
 import { getAbout, urlFor } from '@/lib/sanity'
 import { safe } from '@/lib/safe'
-import type { About, SanityImage } from '@/lib/types'
+import type { About, PortableTextBlock, SanityImage } from '@/lib/types'
 import { PatternDivider } from '@/components/PatternDivider'
 import { FadeIn } from '@/components/FadeIn'
+import { HighlightText } from '@/components/HighlightText'
 
 export const metadata: Metadata = {
   title: 'About · Illumined Human Somatics',
@@ -13,37 +15,14 @@ export const metadata: Metadata = {
     'Meet Molly Dilg — somatic massage, private yoga, and psychosomatic coaching in Portland, Oregon.',
 }
 
-// Render the hero heading, italicizing the highlighted word in orange.
-function renderHeading(text: string, highlight?: string) {
-  if (!highlight) return text
-  const i = text.toLowerCase().indexOf(highlight.toLowerCase())
-  if (i === -1) return text
-  return (
-    <>
-      {text.slice(0, i)}
-      <em className="italic text-orange">
-        {text.slice(i, i + highlight.length)}
-      </em>
-      {text.slice(i + highlight.length)}
-    </>
-  )
-}
-
 const dropCap =
   'first-letter:float-left first-letter:mr-3 first-letter:mt-1 first-letter:font-display first-letter:text-[3.4rem] first-letter:font-normal first-letter:leading-[0.7] first-letter:text-orange'
 
-// Molly's story — hardcoded so the photos can be woven precisely between
-// paragraphs. (Photos come from the Studio; the text lives here.)
-const bio = [
-  `One of my earliest memories is me as a toddler lying down underneath my mom while she is holding a plank pose doing her Jane Fonda cassette tape workout. I am looking at a picture book of kids doing yoga; I have decided to practice Embryo Pose and proudly place myself below my mom's pelvis while saying "I'm your egg!" Astute, and, a little annoying, but my mom was trying desperately to get back into her own body after hatching her egg and supporting the autonomy of that person's (my!) body and was glad to have me distracted enough to give her the time (if not entirely the space) to get moving. I love the fact that that earliest memory includes yoga, movement, learning, and relationally exploring both bodily autonomy, similarity, and interdependent connection.`,
-  `It was my mom who later took me to my first yoga class at the age of 12, successfully bribing me with the promise of a donut after class. While I loved the donut (pink with sprinkles), I actually loved the yoga class more. I felt seen by the teacher, welcomed by the community, curious about the practice, and at home in my body (a rare somatic experience as a tween). Between classes, I poured over books about yoga philosophy, as well as the trusty picture books focused on anatomy and alignment. I pursued independent study with dance instructor Arianne MacBean, at my school and taught my very first class when I was 16.`,
-  `In 2008, as the economy turned and the prospects for my liberal arts degree in Southwest Studies waned, I decided to graduate a semester early from Colorado College and use the extra time to obtain my 200 hour yoga teacher certification. For 12 years I worked full time in yoga, where every day I got to witness the transformation that arose from practicing presence, patience, peace, and personal power in hour-long formats of self-discovery.`,
-  `The pivot spurred by Covid gave me the unexpected experience of shifting my teaching skills to a virtual format, scaling my teacher training leadership experience from a group of 25 to over 1,000, and managing a group of 9 studios to 17 across the upper left coast of the US. I experienced severe burnout in getting those studios reopened pre-vaccine and during a time when teachers were still receiving higher pay in stimulus checks to stay home than to return to an uncertain and speculatively unsafe work environment. In 2021 I took a break from my yoga career, which clarified its importance in my life and its contribution to my wholeness. I hope to teach, share, practice and participate in yoga for the rest of my life.`,
-  `The large scale disorientation of the pandemic left my body/mind less connected and more fractious. I developed an autoimmune disorder and symptoms were synchronous with time spent working long hours on the computer, in ergonomically questionable positions, with stress seeping into my psyche and somatic landscape with a permeability that was palpable. In 2024 I was laid off with a severance that afforded me the opportunity to make a courageous change, I chose to go back to school for massage therapy and psychosomatic integration.`,
-  `My mom talks about being pregnant with me and sensing "the pacific influence of Molly Dilg" - she felt a settling and calm coming from the energy that was collecting inside her as I took shape. From the time I was little she talked about my "healing hands" and shared hers with me through Reiki any time I wasn't feeling well. When I was 12, she enrolled us both in a level 1 Reiki certification program and I deep dove into chakras and energy work, loving every minute of it. At nights I would beg my dad to massage, rather than read, me to sleep (which, as an English teacher, he'd somewhat begrudgingly accommodate). I grew up present to the power of touch, and the way even subtle touch could communicate so much presence. I always knew massage therapy would be a part of my career collage, but it wasn't until 2025 that I started working formally in the field.`,
-  `Awakening aliveness through massage by connecting body, mind, heart, and nervous system in coregulated attunement has been a deeply fulfilling professional addition to the somatic inquiry offered by yoga. I believe our bodies are wise and geared towards balance and that our modern world, trauma and tribulation, and the context of culture can interrupt that wisdom and innate intelligence. Through massage, I aim to offer space, setting, and settling, so that clients can listen to the body's whispers before they become yells. As a massage therapist, I listen in for those whispers through breath, presentation, and responsiveness to touch so that each session is formed in presence, wholeness, and custom-tailored treatment plans to meet the client where they're at from a mind, body, heart, and nervous system perspective.`,
-  `My favorite modalities and techniques to weave into a Swedish style massage are myofascial release, tui na, craniosacral, deep tissue, trigger point therapy, breathwork, and vagal toning exercises. My favorite aspects of teaching yoga are the opportunities to somatically experiment with the embodiment of yoga philosophy through theme, the playful presencing of strength and mobility to open and access different parts of our selves and our anatomy, and the collective effervescence that comes with moving and breathing in a shared and synchronized rhythm to music. And my favorite type of client is YOU :) Hope to work with you soon!`,
-]
+// Plain text of a Portable Text paragraph block.
+function blockText(block: PortableTextBlock): string {
+  const children = block.children as { text?: string }[] | undefined
+  return children?.map((c) => c.text ?? '').join('') ?? ''
+}
 
 // Pull the intrinsic dimensions out of a Sanity asset ref (…-WxH-ext).
 function refDims(ref?: string) {
@@ -122,6 +101,28 @@ export default async function AboutPage() {
   const heroHighlight = about?.heroHighlight ?? 'light'
   const credential = about?.credential ?? 'Trained at East West · Portland, OR'
 
+  // Story paragraphs from the CMS.
+  const paragraphs = (about?.bio ?? []).filter((b) => b._type === 'block')
+  const total = paragraphs.length
+
+  // Weave the story photos through the paragraphs (never on the intro one),
+  // spread evenly and alternating sides. The feature image sits near the middle.
+  const featureAfter = total > 1 ? Math.floor((total - 1) / 2) : -1
+  const photoByPara = new Map<number, { image: SanityImage; align: 'left' | 'right' }>()
+  const usable = story.slice(0, Math.max(0, total - 1))
+  const used = new Set<number>()
+  usable.forEach((image, j) => {
+    let idx = Math.min(
+      total - 1,
+      Math.max(1, 1 + Math.round((j * (total - 1)) / usable.length)),
+    )
+    while (used.has(idx) && idx < total - 1) idx++
+    while (used.has(idx) && idx > 1) idx--
+    if (used.has(idx)) return
+    used.add(idx)
+    photoByPara.set(idx, { image, align: j % 2 === 0 ? 'right' : 'left' })
+  })
+
   return (
     <>
       {/* ── Intro ────────────────────────────────────────────── */}
@@ -164,7 +165,7 @@ export default async function AboutPage() {
               </span>
             </div>
             <h1 className="mt-5 max-w-[18ch] text-balance text-3xl leading-[1.18] text-deep sm:text-4xl">
-              {renderHeading(heroHeading, heroHighlight)}
+              <HighlightText text={heroHeading} word={heroHighlight} />
             </h1>
             {credential && (
               <p className="mt-6 font-sans text-[11px] font-light uppercase tracking-[0.18em] text-turq-deep">
@@ -183,56 +184,40 @@ export default async function AboutPage() {
 
       <PatternDivider className="!py-4 md:!py-8" />
 
-      {/* ── Her story (photos woven in) ──────────────────────── */}
+      {/* ── Her story (photos woven in from the CMS) ─────────── */}
       <section className="pb-24 pt-1 md:pt-6">
         <div className="mx-auto max-w-2xl px-6">
-          <p className={`leading-loose text-mid ${dropCap}`}>{bio[0]}</p>
-
-          {/* One photo per body paragraph, in CMS order, alternating sides.
-              Supports up to 6 story images (the intro and the paragraph right
-              after the feature image stay photo-free). */}
-          <div className="mt-8 flow-root">
-            {story[0] && <FloatPhoto image={story[0]} align="right" />}
-            <p className="leading-loose text-mid">{bio[1]}</p>
-          </div>
-
-          <div className="mt-8 flow-root">
-            {story[1] && <FloatPhoto image={story[1]} align="left" />}
-            <p className="leading-loose text-mid">{bio[2]}</p>
-          </div>
-
-          <div className="mt-8 flow-root">
-            {story[2] && <FloatPhoto image={story[2]} align="right" />}
-            <p className="leading-loose text-mid">{bio[3]}</p>
-          </div>
-
-          {about?.featureImage && <FeatureImage image={about.featureImage} />}
-
-          <p className="mt-8 leading-loose text-mid">{bio[4]}</p>
-
-          <FadeIn>
-            <blockquote className="my-10 border-y border-turq/25 py-8 text-center">
-              <p className="mx-auto max-w-lg font-display text-2xl italic leading-snug text-deep sm:text-3xl">
-                &ldquo;&hellip;so clients can listen to the body&rsquo;s whispers
-                before they become yells.&rdquo;
-              </p>
-            </blockquote>
-          </FadeIn>
-
-          <div className="mt-8 flow-root">
-            {story[3] && <FloatPhoto image={story[3]} align="left" />}
-            <p className="leading-loose text-mid">{bio[5]}</p>
-          </div>
-
-          <div className="mt-8 flow-root">
-            {story[4] && <FloatPhoto image={story[4]} align="right" />}
-            <p className="leading-loose text-mid">{bio[6]}</p>
-          </div>
-
-          <div className="mt-8 flow-root">
-            {story[5] && <FloatPhoto image={story[5]} align="left" />}
-            <p className="leading-loose text-mid">{bio[7]}</p>
-          </div>
+          {paragraphs.map((block, i) => {
+            const photo = photoByPara.get(i)
+            return (
+              <Fragment key={block._key ?? i}>
+                {i === 0 ? (
+                  <p className={`leading-loose text-mid ${dropCap}`}>
+                    {blockText(block)}
+                  </p>
+                ) : (
+                  <div className="mt-8 flow-root">
+                    {photo && (
+                      <FloatPhoto image={photo.image} align={photo.align} />
+                    )}
+                    <p className="leading-loose text-mid">{blockText(block)}</p>
+                  </div>
+                )}
+                {about?.featureImage && i === featureAfter && (
+                  <FeatureImage image={about.featureImage} />
+                )}
+                {about?.pullQuote && i === featureAfter + 1 && (
+                  <FadeIn>
+                    <blockquote className="my-10 border-y border-turq/25 py-8 text-center">
+                      <p className="mx-auto max-w-lg font-display text-2xl italic leading-snug text-deep sm:text-3xl">
+                        &ldquo;{about.pullQuote}&rdquo;
+                      </p>
+                    </blockquote>
+                  </FadeIn>
+                )}
+              </Fragment>
+            )
+          })}
         </div>
       </section>
     </>

@@ -47,18 +47,11 @@ export const about = defineType({
     }),
     defineField({
       name: 'bio',
-      title: 'Bio',
+      title: 'Story',
       type: 'array',
       of: [{ type: 'block' }],
-    }),
-    defineField({
-      name: 'featureImage',
-      title: 'Story Feature Photo (wide / full-width)',
-      type: 'image',
-      options: { hotspot: true },
-      fields: [{ name: 'alt', title: 'Alt text', type: 'string' }],
       description:
-        'A wide landscape photo shown FULL-WIDTH partway through the story — e.g. the handstand on the painted street sun.',
+        "Molly's story, shown on the About page. Each paragraph is one block — the story photos are woven between them automatically, alternating sides.",
     }),
     defineField({
       name: 'storyImages',
@@ -73,6 +66,23 @@ export const about = defineType({
       ],
       description:
         'A few portrait photos placed between paragraphs of the story (they alternate sides). 2–3 is ideal.',
+    }),
+    defineField({
+      name: 'featureImage',
+      title: 'Story Feature Photo (wide / full-width)',
+      type: 'image',
+      options: { hotspot: true },
+      fields: [{ name: 'alt', title: 'Alt text', type: 'string' }],
+      description:
+        'A wide landscape photo shown FULL-WIDTH partway through the story — e.g. the handstand on the painted street sun.',
+    }),
+    defineField({
+      name: 'pullQuote',
+      title: 'Pull Quote',
+      type: 'text',
+      rows: 2,
+      description:
+        'A short highlighted quote shown partway through the story. Leave blank to hide it. (Quotation marks are added automatically.)',
     }),
     defineField({
       name: 'certifications',

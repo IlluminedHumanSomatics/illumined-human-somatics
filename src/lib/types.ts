@@ -112,6 +112,7 @@ export interface About {
   heroHighlight?: string
   credential?: string
   bio?: PortableTextBlock[]
+  pullQuote?: string
   photo?: SanityImage
   featureImage?: SanityImage
   storyImages?: SanityImage[]
