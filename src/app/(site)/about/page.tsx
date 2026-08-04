@@ -134,7 +134,8 @@ export default async function AboutPage() {
           <p className={`leading-loose text-mid ${dropCap}`}>{bio[0]}</p>
 
           {/* One photo per body paragraph, in CMS order, alternating sides.
-              Supports up to 7 story images (bio[0] intro stays photo-free). */}
+              Supports up to 6 story images (the intro and the paragraph right
+              after the feature image stay photo-free). */}
           <div className="mt-8 flow-root">
             {story[0] && <FloatPhoto image={story[0]} align="right" />}
             <p className="leading-loose text-mid">{bio[1]}</p>
@@ -152,10 +153,7 @@ export default async function AboutPage() {
 
           {about?.featureImage && <FeatureImage image={about.featureImage} />}
 
-          <div className="mt-8 flow-root">
-            {story[3] && <FloatPhoto image={story[3]} align="left" />}
-            <p className="leading-loose text-mid">{bio[4]}</p>
-          </div>
+          <p className="mt-8 leading-loose text-mid">{bio[4]}</p>
 
           <FadeIn>
             <blockquote className="my-10 border-y border-turq/25 py-8 text-center">
@@ -167,17 +165,17 @@ export default async function AboutPage() {
           </FadeIn>
 
           <div className="mt-8 flow-root">
-            {story[4] && <FloatPhoto image={story[4]} align="right" />}
+            {story[3] && <FloatPhoto image={story[3]} align="left" />}
             <p className="leading-loose text-mid">{bio[5]}</p>
           </div>
 
           <div className="mt-8 flow-root">
-            {story[5] && <FloatPhoto image={story[5]} align="left" />}
+            {story[4] && <FloatPhoto image={story[4]} align="right" />}
             <p className="leading-loose text-mid">{bio[6]}</p>
           </div>
 
           <div className="mt-8 flow-root">
-            {story[6] && <FloatPhoto image={story[6]} align="right" />}
+            {story[5] && <FloatPhoto image={story[5]} align="left" />}
             <p className="leading-loose text-mid">{bio[7]}</p>
           </div>
         </div>
