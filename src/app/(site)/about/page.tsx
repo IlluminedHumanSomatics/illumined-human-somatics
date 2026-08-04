@@ -13,7 +13,21 @@ export const metadata: Metadata = {
     'Meet Molly Dilg — somatic massage, private yoga, and psychosomatic coaching in Portland, Oregon.',
 }
 
-const tagline = 'I add light through grounded gratitude and empathic inquiry.'
+// Render the hero heading, italicizing the highlighted word in orange.
+function renderHeading(text: string, highlight?: string) {
+  if (!highlight) return text
+  const i = text.toLowerCase().indexOf(highlight.toLowerCase())
+  if (i === -1) return text
+  return (
+    <>
+      {text.slice(0, i)}
+      <em className="italic text-orange">
+        {text.slice(i, i + highlight.length)}
+      </em>
+      {text.slice(i + highlight.length)}
+    </>
+  )
+}
 
 const dropCap =
   'first-letter:float-left first-letter:mr-3 first-letter:mt-1 first-letter:font-display first-letter:text-[3.4rem] first-letter:font-normal first-letter:leading-[0.7] first-letter:text-orange'
@@ -31,7 +45,14 @@ const bio = [
   `My favorite modalities and techniques to weave into a Swedish style massage are myofascial release, tui na, craniosacral, deep tissue, trigger point therapy, breathwork, and vagal toning exercises. My favorite aspects of teaching yoga are the opportunities to somatically experiment with the embodiment of yoga philosophy through theme, the playful presencing of strength and mobility to open and access different parts of our selves and our anatomy, and the collective effervescence that comes with moving and breathing in a shared and synchronized rhythm to music. And my favorite type of client is YOU :) Hope to work with you soon!`,
 ]
 
-// A portrait that floats beside the text — the story wraps around it.
+// Pull the intrinsic dimensions out of a Sanity asset ref (…-WxH-ext).
+function refDims(ref?: string) {
+  const m = ref?.match(/-(\d+)x(\d+)-[a-z]+$/)
+  return m ? { w: Number(m[1]), h: Number(m[2]) } : { w: 4, h: 5 }
+}
+
+// Mobile: the whole photo at full column width, uncropped. Desktop (sm+): a
+// 4:5 portrait that floats beside the text, with the story wrapping around it.
 function FloatPhoto({
   image,
   align,
@@ -39,20 +60,34 @@ function FloatPhoto({
   image: SanityImage
   align: 'left' | 'right'
 }) {
+  const { w, h } = refDims(image.asset?._ref)
   return (
     <FadeIn
-      className={`mx-auto mb-6 w-2/3 max-w-[15rem] sm:mb-4 sm:mt-2 sm:w-[40%] sm:max-w-[14rem] ${
+      className={`mb-6 sm:mb-4 sm:mt-2 sm:w-[40%] sm:max-w-[14rem] ${
         align === 'right'
           ? 'sm:float-right sm:ml-8'
           : 'sm:float-left sm:mr-8'
       }`}
     >
-      <div className="relative aspect-[4/5] overflow-hidden rounded-2xl">
+      {/* Mobile: whole image (no crop). Portrait shots are narrowed so they
+          don't tower over the column; wide/square ones fill it. */}
+      <Image
+        src={urlFor(image).width(900).quality(82).url()}
+        alt={image.alt ?? 'Molly Dilg'}
+        width={w}
+        height={h}
+        sizes={h > w ? '70vw' : '100vw'}
+        className={`h-auto rounded-2xl sm:hidden ${
+          h > w ? 'mx-auto w-[70%]' : 'w-full'
+        }`}
+      />
+      {/* Desktop: 4:5 hotspot crop, floated beside the text */}
+      <div className="relative hidden aspect-[4/5] overflow-hidden rounded-2xl sm:block">
         <Image
           src={urlFor(image).width(600).height(750).quality(82).url()}
           alt={image.alt ?? 'Molly Dilg'}
           fill
-          sizes="(min-width: 640px) 224px, 66vw"
+          sizes="224px"
           className="object-cover"
         />
       </div>
@@ -81,24 +116,43 @@ export default async function AboutPage() {
   const about = await safe<About | null>(getAbout(), null)
   const story = about?.storyImages ?? []
 
+  const heroHeading =
+    about?.heroHeading ??
+    'I add light through grounded gratitude and empathic inquiry.'
+  const heroHighlight = about?.heroHighlight ?? 'light'
+  const credential = about?.credential ?? 'Trained at East West · Portland, OR'
+
   return (
     <>
       {/* ── Intro ────────────────────────────────────────────── */}
-      <section className="px-6 pb-8 pt-20">
-        <div className="mx-auto grid max-w-4xl items-center justify-center gap-12 md:grid-cols-[17rem_auto] md:gap-14">
+      <section className="px-6 pb-4 pt-8 md:pb-8 md:pt-20">
+        <div className="mx-auto grid max-w-4xl items-center justify-center gap-8 md:grid-cols-[17rem_auto] md:gap-14">
           {about?.photo ? (
-            <div className="relative mx-auto aspect-[3/4] w-full max-w-[17rem] overflow-hidden rounded-3xl md:mx-0">
+            <div className="mx-auto w-full max-w-[24rem] md:mx-0 md:max-w-[17rem]">
+              {/* Mobile: the whole landscape photo, full column width */}
               <Image
-                src={urlFor(about.photo).width(680).height(906).url()}
+                src={urlFor(about.photo).width(1200).height(800).url()}
                 alt={about.photo.alt ?? about.fullName}
-                fill
+                width={1200}
+                height={800}
                 priority
-                sizes="(min-width: 768px) 272px, 100vw"
-                className="rounded-3xl object-cover"
+                sizes="(min-width: 640px) 384px, 100vw"
+                className="h-auto w-full rounded-3xl md:hidden"
               />
+              {/* Desktop: 3:4 portrait crop beside the text */}
+              <div className="relative hidden aspect-[3/4] overflow-hidden rounded-3xl md:block">
+                <Image
+                  src={urlFor(about.photo).width(680).height(906).url()}
+                  alt={about.photo.alt ?? about.fullName}
+                  fill
+                  priority
+                  sizes="272px"
+                  className="rounded-3xl object-cover"
+                />
+              </div>
             </div>
           ) : (
-            <div className="mx-auto flex aspect-[3/4] w-full max-w-[17rem] items-center justify-center rounded-3xl border border-orange/15 bg-gradient-to-br from-orange/[0.06] to-turq/[0.05] font-sans text-[11px] uppercase tracking-[0.14em] text-mid/30 md:mx-0">
+            <div className="mx-auto flex aspect-[3/2] w-full max-w-[24rem] items-center justify-center rounded-3xl border border-orange/15 bg-gradient-to-br from-orange/[0.06] to-turq/[0.05] font-sans text-[11px] uppercase tracking-[0.14em] text-mid/30 md:mx-0 md:aspect-[3/4] md:max-w-[17rem]">
               Molly&rsquo;s photo
             </div>
           )}
@@ -110,12 +164,13 @@ export default async function AboutPage() {
               </span>
             </div>
             <h1 className="mt-5 max-w-[18ch] text-balance text-3xl leading-[1.18] text-deep sm:text-4xl">
-              I add <em className="italic text-orange">light</em> through
-              grounded gratitude and empathic inquiry.
+              {renderHeading(heroHeading, heroHighlight)}
             </h1>
-            <p className="mt-6 font-sans text-[11px] font-light uppercase tracking-[0.18em] text-turq-deep">
-              Trained at East West · Portland, OR
-            </p>
+            {credential && (
+              <p className="mt-6 font-sans text-[11px] font-light uppercase tracking-[0.18em] text-turq-deep">
+                {credential}
+              </p>
+            )}
             <Link
               href="/massage"
               className="mt-8 mx-auto block w-fit rounded-full bg-orange px-7 py-3 font-sans text-[11px] font-light uppercase tracking-[0.22em] text-white transition-colors hover:bg-terra-deep md:mx-0"
@@ -126,10 +181,10 @@ export default async function AboutPage() {
         </div>
       </section>
 
-      <PatternDivider />
+      <PatternDivider className="!py-4 md:!py-8" />
 
       {/* ── Her story (photos woven in) ──────────────────────── */}
-      <section className="pb-24 pt-6">
+      <section className="pb-24 pt-1 md:pt-6">
         <div className="mx-auto max-w-2xl px-6">
           <p className={`leading-loose text-mid ${dropCap}`}>{bio[0]}</p>
 

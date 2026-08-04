@@ -108,6 +108,9 @@ export interface About {
   _id: string
   _type: 'about'
   fullName: string
+  heroHeading?: string
+  heroHighlight?: string
+  credential?: string
   bio?: PortableTextBlock[]
   photo?: SanityImage
   featureImage?: SanityImage

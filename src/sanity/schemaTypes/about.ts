@@ -7,29 +7,49 @@ export const about = defineType({
   type: 'document',
   fields: [
     defineField({
+      name: 'photo',
+      title: 'Main Photo',
+      type: 'image',
+      options: { hotspot: true },
+      description: 'The main photo at the top of the About page.',
+      fields: [
+        defineField({ name: 'alt', title: 'Alt text', type: 'string' }),
+      ],
+    }),
+    defineField({
       name: 'fullName',
       title: 'Full Name',
       type: 'string',
+      description: 'Shown in the small "About …" label at the top.',
       validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: 'heroHeading',
+      title: 'Hero Heading',
+      type: 'text',
+      rows: 2,
+      description:
+        'The large tagline at the top. Leave blank for the default ("I add light through grounded gratitude and empathic inquiry.").',
+    }),
+    defineField({
+      name: 'heroHighlight',
+      title: 'Hero Heading — highlighted word',
+      type: 'string',
+      description:
+        'One word from the heading to italicize in orange (e.g. "light"). Leave blank for none.',
+    }),
+    defineField({
+      name: 'credential',
+      title: 'Credential line',
+      type: 'string',
+      description:
+        'The small line under the heading. Leave blank for the default ("Trained at East West · Portland, OR").',
     }),
     defineField({
       name: 'bio',
       title: 'Bio',
       type: 'array',
       of: [{ type: 'block' }],
-    }),
-    defineField({
-      name: 'photo',
-      title: 'Photo',
-      type: 'image',
-      options: { hotspot: true },
-      fields: [
-        defineField({
-          name: 'alt',
-          title: 'Alt text',
-          type: 'string',
-        }),
-      ],
     }),
     defineField({
       name: 'featureImage',
