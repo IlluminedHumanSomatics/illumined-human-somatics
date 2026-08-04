@@ -157,14 +157,14 @@ export default async function AboutPage() {
               Molly&rsquo;s photo
             </div>
           )}
-          <div>
-            <div className="flex items-center gap-3">
+          <div className="text-center md:text-left">
+            <div className="flex items-center justify-center gap-3 md:justify-start">
               <span className="h-px w-8 bg-orange/70" />
               <span className="font-sans text-[10px] font-light uppercase tracking-[0.28em] text-orange">
                 About {about?.fullName ?? 'Molly'}
               </span>
             </div>
-            <h1 className="mt-5 max-w-[18ch] text-balance text-3xl leading-[1.18] text-deep sm:text-4xl">
+            <h1 className="mt-5 mx-auto max-w-[18ch] text-balance text-3xl leading-[1.18] text-deep sm:text-4xl md:mx-0">
               <HighlightText text={heroHeading} word={heroHighlight} />
             </h1>
             {credential && (

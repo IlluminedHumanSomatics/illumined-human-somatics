@@ -30,7 +30,7 @@ export function LocationCard({ location }: { location: PracticeLocation }) {
         <h3 className="text-2xl text-deep">{name}</h3>
       </div>
       {area && (
-        <p className="mt-1.5 flex items-center gap-1.5 font-sans text-[11px] uppercase tracking-[0.14em] text-mid/70">
+        <p className="ml-0.5 mt-1.5 flex items-center gap-1.5 font-sans text-[11px] uppercase tracking-[0.14em] text-mid/70">
           <MapPin className="h-3.5 w-3.5 text-turq-deep" />
           {area}
         </p>

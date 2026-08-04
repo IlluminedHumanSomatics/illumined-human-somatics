@@ -68,15 +68,15 @@ export default async function ContactPage() {
       </div>
 
       {/* ── Reach out ────────────────────────────────────────── */}
-      <div className="mx-auto mt-10 max-w-xl rounded-3xl border border-mid/15 bg-white/55 p-10 text-center">
+      <div className="mx-auto mt-10 max-w-xl rounded-3xl border border-mid/15 bg-white/55 p-6 text-center sm:p-10">
         <div className="flex flex-col items-start gap-5">
           {email && (
             <a
               href={`mailto:${email}`}
-              className="inline-flex items-center gap-3 text-lg text-deep transition-colors hover:text-orange"
+              className="flex max-w-full items-center gap-3 text-base text-deep transition-colors hover:text-orange sm:text-lg"
             >
               <MailIcon />
-              {email}
+              <span className="min-w-0 break-all">{email}</span>
             </a>
           )}
           {phone && (

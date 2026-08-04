@@ -105,7 +105,7 @@ export default async function MassagePage() {
       </section>
 
       {/* ── The Yurt — book right here (embedded scheduler) ──── */}
-      <section id="book-yurt" className="px-6 pb-20 pt-16">
+      <section id="book-yurt" className="px-6 pb-20 pt-10">
         <div className="mx-auto max-w-2xl text-center">
           <p className="flex items-center justify-center gap-1.5 font-sans text-[11px] font-medium uppercase tracking-[0.2em] text-turq-deep">
             <MapPin className="h-4 w-4" />
