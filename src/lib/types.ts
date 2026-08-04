@@ -120,6 +120,7 @@ export interface PracticeLocation {
   _id: string
   _type: 'practiceLocation'
   name: string
+  logo?: SanityImage
   page: 'massage' | 'yoga'
   area?: string
   description?: string

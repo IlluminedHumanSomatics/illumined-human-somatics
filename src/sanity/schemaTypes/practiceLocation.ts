@@ -16,6 +16,15 @@ export const practiceLocation = defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
+      name: 'logo',
+      title: 'Logo',
+      type: 'image',
+      options: { hotspot: true },
+      description:
+        'Studio logo, shown at the top of the card. A transparent PNG looks best. Optional.',
+      fields: [defineField({ name: 'alt', title: 'Alt text', type: 'string' })],
+    }),
+    defineField({
       name: 'page',
       title: 'Show on which page?',
       type: 'string',
