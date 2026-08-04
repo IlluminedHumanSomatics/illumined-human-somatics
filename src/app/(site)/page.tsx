@@ -4,6 +4,7 @@ import { getHomePage, getAbout, getTestimonials, urlFor } from '@/lib/sanity'
 import { safe } from '@/lib/safe'
 import { SunMotif } from '@/components/SunMotif'
 import { PatternDivider } from '@/components/PatternDivider'
+import { HighlightText } from '@/components/HighlightText'
 
 // Seeded from MassageBook until reviews are added in the CMS.
 const fallbackTestimonials = [
@@ -239,7 +240,7 @@ export default async function HomePage() {
             </div>
             {home?.aboutTeaserHeading && (
               <h2 className="mt-4 text-4xl leading-[1.05] text-deep">
-                {home.aboutTeaserHeading}
+                <HighlightText text={home.aboutTeaserHeading} word="light" />
               </h2>
             )}
             {home?.aboutTeaserText && (
