@@ -60,6 +60,11 @@ function CheckIcon() {
 export function CopyEmail({ email }: { email: string }) {
   const [copied, setCopied] = useState(false)
 
+  // Split at the "@" so the address can wrap there (and only there).
+  const at = email.indexOf('@')
+  const localPart = at >= 0 ? email.slice(0, at + 1) : email
+  const domainPart = at >= 0 ? email.slice(at + 1) : ''
+
   async function copy() {
     let ok = false
     try {
@@ -96,10 +101,21 @@ export function CopyEmail({ email }: { email: string }) {
           ? 'Email address copied to clipboard'
           : `Copy email address ${email}`
       }
-      className="group flex max-w-full items-center gap-3 text-base text-deep transition-colors hover:text-orange sm:text-lg"
+      className="group flex max-w-full items-center gap-2 text-base text-deep transition-colors hover:text-orange sm:gap-3 sm:text-lg"
     >
       <MailIcon />
-      <span className="min-w-0 break-all text-left">{email}</span>
+      {/* Break only at the "@" (never mid-word), so the domain — ".com" and
+          all — always stays whole. Fits one line on normal phones; wraps
+          cleanly at the "@" on very narrow ones. */}
+      <span className="min-w-0 text-left">
+        <span className="whitespace-nowrap">{localPart}</span>
+        {domainPart && (
+          <>
+            <wbr />
+            <span className="whitespace-nowrap">{domainPart}</span>
+          </>
+        )}
+      </span>
       <span
         aria-live="polite"
         className="inline-flex shrink-0 items-center gap-1 text-[11px] font-medium uppercase tracking-[0.12em] text-turq-deep"
