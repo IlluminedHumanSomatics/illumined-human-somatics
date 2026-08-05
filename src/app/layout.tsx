@@ -20,6 +20,7 @@ const jost = Jost({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://illuminedhumansomatics.com"),
   title: "Illumined Human Somatics",
   description:
     "Bodywork, movement, and gatherings — yoga, massage, and workshops rooted in somatic practice.",
