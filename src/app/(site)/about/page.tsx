@@ -189,7 +189,7 @@ export default async function AboutPage() {
           <div className="text-center md:text-left">
             <div className="flex items-center justify-center gap-3 md:justify-start">
               <span className="h-px w-8 bg-orange/70" />
-              <span className="font-sans text-[10px] font-light uppercase tracking-[0.28em] text-orange">
+              <span className="font-sans text-[10px] font-medium uppercase tracking-[0.28em] text-orange">
                 About {about?.fullName ?? 'Molly'}
               </span>
             </div>

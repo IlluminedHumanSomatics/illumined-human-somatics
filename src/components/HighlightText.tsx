@@ -13,7 +13,7 @@ export function HighlightText({
   return (
     <>
       {text.slice(0, i)}
-      <em className="italic text-orange">{text.slice(i, i + word.length)}</em>
+      <em className="italic font-medium text-orange">{text.slice(i, i + word.length)}</em>
       {text.slice(i + word.length)}
     </>
   )

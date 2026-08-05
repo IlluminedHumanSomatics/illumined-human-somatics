@@ -41,7 +41,7 @@ export function SiteHeader() {
           </nav>
           <Link
             href="/massage"
-            className="rounded-full bg-orange px-6 py-2.5 font-sans text-[11px] font-light uppercase tracking-[0.18em] text-white transition-colors hover:bg-terra-deep"
+            className="rounded-full bg-orange px-6 py-2.5 font-sans text-[11px] font-normal uppercase tracking-[0.18em] text-white transition-colors hover:bg-terra-deep"
           >
             Book
           </Link>
@@ -89,7 +89,7 @@ export function SiteHeader() {
             <Link
               href="/massage"
               onClick={() => setOpen(false)}
-              className="mt-3 rounded-full bg-orange px-6 py-3 text-center font-sans text-[12px] font-light uppercase tracking-[0.18em] text-white transition-colors hover:bg-terra-deep"
+              className="mt-3 rounded-full bg-orange px-6 py-3 text-center font-sans text-[12px] font-normal uppercase tracking-[0.18em] text-white transition-colors hover:bg-terra-deep"
             >
               Book
             </Link>

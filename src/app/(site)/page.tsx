@@ -234,7 +234,7 @@ export default async function HomePage() {
           <div>
             <div className="flex items-center gap-3">
               <span className="h-px w-8 bg-orange/70" />
-              <span className="font-sans text-[10px] font-light uppercase tracking-[0.28em] text-orange">
+              <span className="font-sans text-[10px] font-medium uppercase tracking-[0.28em] text-orange">
                 {about?.fullName ? `About ${about.fullName.split(' ')[0]}` : 'About Molly'}
               </span>
             </div>
@@ -250,7 +250,7 @@ export default async function HomePage() {
             )}
             <Link
               href="/about"
-              className="mt-7 inline-block border-b border-orange/30 pb-1 font-sans text-[10px] font-light uppercase tracking-[0.2em] text-orange transition-opacity hover:opacity-60"
+              className="mt-7 inline-block border-b border-orange/30 pb-1 font-sans text-[10px] font-medium uppercase tracking-[0.2em] text-orange transition-opacity hover:opacity-60"
             >
               Read Molly&rsquo;s story →
             </Link>

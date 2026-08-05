@@ -97,7 +97,7 @@ export default async function MassagePage() {
             href={bookingUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-9 inline-block rounded-full bg-orange px-8 py-3.5 font-sans text-[11px] font-light uppercase tracking-[0.22em] text-white transition-colors hover:bg-terra-deep"
+            className="mt-9 inline-block rounded-full bg-orange px-8 py-3.5 font-sans text-[11px] font-normal uppercase tracking-[0.22em] text-white transition-colors hover:bg-terra-deep"
           >
             Book a session
           </a>
