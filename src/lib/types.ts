@@ -56,6 +56,7 @@ export interface MassagePage {
   bookingEyebrow?: string
   bookingHeading?: string
   bookingText?: string
+  bookingEmbedUrl?: string
   otherHeading?: string
   otherText?: string
 }

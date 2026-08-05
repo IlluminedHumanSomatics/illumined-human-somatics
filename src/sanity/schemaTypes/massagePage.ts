@@ -68,6 +68,14 @@ export const massagePage = defineType({
       description: 'The paragraph above the booking scheduler.',
     }),
     defineField({
+      name: 'bookingEmbedUrl',
+      title: 'Embedded scheduler URL',
+      type: 'url',
+      group: 'booking',
+      description:
+        'The MassageBook booking widget shown in the box on the page. Paste the "widget/services" embed URL from MassageBook. Leave blank to use the current default.',
+    }),
+    defineField({
       name: 'otherHeading',
       title: 'Heading',
       type: 'string',

@@ -17,39 +17,12 @@ export const metadata: Metadata = {
     'Somatic massage and bodywork with Molly in a Portland yurt — choose a service and book your session.',
 }
 
-// Shown only if no locations have been added in Studio yet.
-const fallbackLocations: PracticeLocation[] = [
-  {
-    _id: 'fb-yomassage',
-    _type: 'practiceLocation',
-    name: 'Yomassage',
-    page: 'massage',
-    area: 'Portland',
-    description: 'Bodywork sessions at Yomassage. Reach out to book a time.',
-    linkLabel: 'Inquire',
-    linkUrl: '/contact',
-  },
-  {
-    _id: 'fb-wotb',
-    _type: 'practiceLocation',
-    name: 'Written on the Body',
-    page: 'massage',
-    area: 'Portland · Wednesdays',
-    description:
-      'Massage at the Written on the Body studio, booked through their scheduler.',
-    linkLabel: 'Book here',
-    linkUrl: 'https://www.portlandmassagestudio.com/massage#molly',
-  },
-]
-
 export default async function MassagePage() {
-  const [contact, massage, cmsLocations] = await Promise.all([
+  const [contact, massage, locations] = await Promise.all([
     safe<ContactInfo | null>(getContactInfo(), null),
     safe<MassagePage | null>(getMassagePage(), null),
     safe<PracticeLocation[]>(getPracticeLocations('massage'), []),
   ])
-
-  const locations = cmsLocations.length > 0 ? cmsLocations : fallbackLocations
 
   const bookingUrl =
     contact?.bookingUrl ??
@@ -73,6 +46,9 @@ export default async function MassagePage() {
   const otherHeading = massage?.otherHeading ?? 'Also find Molly at'
   const otherText =
     massage?.otherText ?? 'Molly also offers bodywork at two other Portland spaces.'
+  const bookingEmbedUrl =
+    massage?.bookingEmbedUrl ??
+    'https://www.massagebook.com/therapists/illumined-human-somatics/widget/services'
 
   return (
     <>
@@ -120,7 +96,7 @@ export default async function MassagePage() {
         </div>
         <div className="mx-auto mt-10 max-w-3xl overflow-hidden rounded-3xl border border-mid/15 bg-white/70">
           <iframe
-            src="https://www.massagebook.com/therapists/illumined-human-somatics/widget/services"
+            src={bookingEmbedUrl}
             title="Book a massage with Molly in the yurt"
             loading="lazy"
             className="block h-[630px] w-full border-0"
@@ -128,21 +104,23 @@ export default async function MassagePage() {
         </div>
       </section>
 
-      {/* ── Also find Molly at (the other two locations) ─────── */}
-      <section className="border-t border-mid/10 px-6 pb-24 pt-16">
-        <div className="mx-auto max-w-2xl text-center">
-          <h2 className="text-3xl text-deep sm:text-4xl">{otherHeading}</h2>
-          <p className="mx-auto mt-4 max-w-md leading-relaxed text-mid">
-            {otherText}
-          </p>
-        </div>
+      {/* ── Also find Molly at (the other locations) ─────────── */}
+      {locations.length > 0 && (
+        <section className="border-t border-mid/10 px-6 pb-24 pt-16">
+          <div className="mx-auto max-w-2xl text-center">
+            <h2 className="text-3xl text-deep sm:text-4xl">{otherHeading}</h2>
+            <p className="mx-auto mt-4 max-w-md leading-relaxed text-mid">
+              {otherText}
+            </p>
+          </div>
 
-        <div className="mx-auto mt-10 grid max-w-3xl gap-6 sm:grid-cols-2">
-          {locations.map((loc) => (
-            <LocationCard key={loc._id} location={loc} />
-          ))}
-        </div>
-      </section>
+          <div className="mx-auto mt-10 grid max-w-3xl gap-6 sm:grid-cols-2">
+            {locations.map((loc) => (
+              <LocationCard key={loc._id} location={loc} />
+            ))}
+          </div>
+        </section>
+      )}
     </>
   )
 }
