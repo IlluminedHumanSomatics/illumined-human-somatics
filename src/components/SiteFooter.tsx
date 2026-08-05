@@ -43,7 +43,7 @@ function FooterSunMark() {
       width="40"
       height="40"
       viewBox="0 0 60 60"
-      className="overflow-visible"
+      className="h-8 w-8 overflow-visible md:h-10 md:w-10"
       aria-hidden="true"
     >
       <g className="ihs-spin">
@@ -79,7 +79,6 @@ export async function SiteFooter() {
   const instagramUrl =
     contact?.instagramUrl ??
     'https://www.instagram.com/illumined_human_somatics/'
-  const email = contact?.email ?? 'illuminedhumansomatics@gmail.com'
   const location = contact?.locationDescription ?? 'Portland, Oregon'
 
   return (
@@ -104,19 +103,13 @@ export async function SiteFooter() {
         <div className="flex flex-col md:items-end md:text-right">
           <div className="flex items-center gap-3">
             <FooterSunMark />
-            <p className="font-display text-3xl tracking-[0.08em] text-deep">
+            <p className="whitespace-nowrap font-display text-xl tracking-[0.05em] text-deep md:text-3xl md:tracking-[0.08em]">
               Illumined Human Somatics
             </p>
           </div>
           <p className="mt-2 font-display text-lg italic text-mid">
             with Molly Dilg
           </p>
-          <a
-            href={`mailto:${email}`}
-            className="mt-5 text-base text-mid transition-colors hover:text-orange"
-          >
-            {email}
-          </a>
           <div className="mt-5 flex items-center gap-2.5 text-base text-mid">
             <MapPin className="h-[18px] w-[18px] text-turq-deep" />
             {location}
