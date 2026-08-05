@@ -61,11 +61,27 @@ export const about = defineType({
         {
           type: 'image',
           options: { hotspot: true },
-          fields: [{ name: 'alt', title: 'Alt text', type: 'string' }],
+          fields: [
+            { name: 'alt', title: 'Alt text', type: 'string' },
+            {
+              name: 'size',
+              title: 'Size',
+              type: 'string',
+              options: {
+                list: [
+                  { title: 'Small', value: 'sm' },
+                  { title: 'Medium (default)', value: 'md' },
+                  { title: 'Large', value: 'lg' },
+                ],
+                layout: 'radio',
+              },
+              initialValue: 'md',
+            },
+          ],
         },
       ],
       description:
-        'A few portrait photos placed between paragraphs of the story (they alternate sides). 2–3 is ideal.',
+        'Portrait photos woven between the story paragraphs (they alternate sides). Set each one’s Size to make it a bit wider or narrower.',
     }),
     defineField({
       name: 'featureImage',

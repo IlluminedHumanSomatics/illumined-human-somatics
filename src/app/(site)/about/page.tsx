@@ -4,7 +4,12 @@ import { Fragment } from 'react'
 import type { Metadata } from 'next'
 import { getAbout, urlFor } from '@/lib/sanity'
 import { safe } from '@/lib/safe'
-import type { About, PortableTextBlock, SanityImage } from '@/lib/types'
+import type {
+  About,
+  PortableTextBlock,
+  SanityImage,
+  StoryImage,
+} from '@/lib/types'
 import { PatternDivider } from '@/components/PatternDivider'
 import { FadeIn } from '@/components/FadeIn'
 import { HighlightText } from '@/components/HighlightText'
@@ -35,14 +40,23 @@ function refDims(ref?: string) {
 function FloatPhoto({
   image,
   align,
+  size = 'md',
 }: {
-  image: SanityImage
+  image: StoryImage
   align: 'left' | 'right'
+  size?: 'sm' | 'md' | 'lg'
 }) {
   const { w, h } = refDims(image.asset?._ref)
+  // Desktop float width, set per photo in the CMS.
+  const desktopWidth =
+    size === 'lg'
+      ? 'sm:w-[46%] sm:max-w-[16rem]'
+      : size === 'sm'
+        ? 'sm:w-[34%] sm:max-w-[12rem]'
+        : 'sm:w-[40%] sm:max-w-[14rem]'
   return (
     <FadeIn
-      className={`mb-6 sm:mb-4 sm:mt-2 sm:w-[40%] sm:max-w-[14rem] ${
+      className={`mb-6 sm:mb-4 sm:mt-2 ${desktopWidth} ${
         align === 'right'
           ? 'sm:float-right sm:ml-8'
           : 'sm:float-left sm:mr-8'
@@ -101,27 +115,42 @@ export default async function AboutPage() {
   const heroHighlight = about?.heroHighlight ?? 'light'
   const credential = about?.credential ?? 'Trained at East West · Portland, OR'
 
-  // Story paragraphs from the CMS.
-  const paragraphs = (about?.bio ?? []).filter((b) => b._type === 'block')
+  // Story paragraphs from the CMS — real ones only. (The editor can leave
+  // empty blocks between paragraphs; those must not count as paragraphs.)
+  const paragraphs = (about?.bio ?? []).filter(
+    (b) => b._type === 'block' && blockText(b).trim().length > 0,
+  )
   const total = paragraphs.length
 
-  // Weave the story photos through the paragraphs (never on the intro one),
-  // spread evenly and alternating sides. The feature image sits near the middle.
+  // The feature image sits near the middle of the story.
   const featureAfter = total > 1 ? Math.floor((total - 1) / 2) : -1
-  const photoByPara = new Map<number, { image: SanityImage; align: 'left' | 'right' }>()
-  const usable = story.slice(0, Math.max(0, total - 1))
-  const used = new Set<number>()
-  usable.forEach((image, j) => {
-    let idx = Math.min(
-      total - 1,
-      Math.max(1, 1 + Math.round((j * (total - 1)) / usable.length)),
-    )
-    while (used.has(idx) && idx < total - 1) idx++
-    while (used.has(idx) && idx > 1) idx--
-    if (used.has(idx)) return
-    used.add(idx)
-    photoByPara.set(idx, { image, align: j % 2 === 0 ? 'right' : 'left' })
-  })
+
+  // Photos weave only into substantial paragraphs — never the intro (index 0),
+  // never very short ones — so a tall photo always has enough text to wrap.
+  const eligible = paragraphs
+    .map((b, i) => ({ i, len: blockText(b).trim().length }))
+    .filter((p) => p.i !== 0 && p.len >= 160)
+    .map((p) => p.i)
+
+  // Split the photos around the feature image: the first half go in paragraphs
+  // above it, the rest in the paragraphs below it — spread evenly, sides
+  // alternating down the page.
+  const beforeSlots = eligible.filter((i) => i <= featureAfter)
+  const afterSlots = eligible.filter((i) => i > featureAfter)
+  const half = Math.floor(story.length / 2)
+  const photoByPara = new Map<number, { image: StoryImage; align: 'left' | 'right' }>()
+  let j = 0
+  for (const [imgs, slots] of [
+    [story.slice(0, half), beforeSlots],
+    [story.slice(half), afterSlots],
+  ] as const) {
+    const use = imgs.slice(0, slots.length)
+    use.forEach((image, k) => {
+      const idx = slots[Math.floor((k * slots.length) / use.length)]
+      photoByPara.set(idx, { image, align: j % 2 === 0 ? 'right' : 'left' })
+      j++
+    })
+  }
 
   return (
     <>
@@ -186,7 +215,7 @@ export default async function AboutPage() {
 
       {/* ── Her story (photos woven in from the CMS) ─────────── */}
       <section className="pb-24 pt-1 md:pt-6">
-        <div className="mx-auto max-w-2xl px-6">
+        <div className="mx-auto max-w-3xl px-6">
           {paragraphs.map((block, i) => {
             const photo = photoByPara.get(i)
             return (
@@ -198,7 +227,11 @@ export default async function AboutPage() {
                 ) : (
                   <div className="mt-8 flow-root">
                     {photo && (
-                      <FloatPhoto image={photo.image} align={photo.align} />
+                      <FloatPhoto
+                        image={photo.image}
+                        align={photo.align}
+                        size={photo.image.size}
+                      />
                     )}
                     <p className="leading-loose text-mid">{blockText(block)}</p>
                   </div>
@@ -206,7 +239,7 @@ export default async function AboutPage() {
                 {about?.featureImage && i === featureAfter && (
                   <FeatureImage image={about.featureImage} />
                 )}
-                {about?.pullQuote && i === featureAfter + 1 && (
+                {about?.pullQuote && i === featureAfter && (
                   <FadeIn>
                     <blockquote className="my-10 border-y border-turq/25 py-8 text-center">
                       <p className="mx-auto max-w-lg font-display text-2xl italic leading-snug text-deep sm:text-3xl">

@@ -14,6 +14,11 @@ export interface SanityImage {
   alt?: string
 }
 
+// A story photo with an optional per-photo width setting.
+export interface StoryImage extends SanityImage {
+  size?: 'sm' | 'md' | 'lg'
+}
+
 export interface ServiceDuration {
   duration?: string
   price?: string
@@ -115,7 +120,7 @@ export interface About {
   pullQuote?: string
   photo?: SanityImage
   featureImage?: SanityImage
-  storyImages?: SanityImage[]
+  storyImages?: StoryImage[]
   certifications?: string[]
   yearsOfPractice?: number
 }
