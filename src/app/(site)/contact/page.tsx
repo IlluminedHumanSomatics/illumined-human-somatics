@@ -3,20 +3,12 @@ import Link from 'next/link'
 import { getContactInfo } from '@/lib/sanity'
 import type { ContactInfo } from '@/lib/types'
 import { MapPin } from '@/components/MapPin'
+import { CopyEmail } from '@/components/CopyEmail'
 
 export const metadata: Metadata = {
   title: 'Contact · Illumined Human Somatics',
   description:
     'Get in touch with Molly Dilg — book a massage or yoga session, or say hello by email or Instagram in Portland, Oregon.',
-}
-
-function MailIcon() {
-  return (
-    <svg viewBox="0 0 24 24" className="h-5 w-5 shrink-0 text-turq-deep" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <rect x="3" y="5" width="18" height="14" rx="2" />
-      <path d="m3 7 9 6 9-6" />
-    </svg>
-  )
 }
 
 function PhoneIcon() {
@@ -70,15 +62,7 @@ export default async function ContactPage() {
       {/* ── Reach out ────────────────────────────────────────── */}
       <div className="mx-auto mt-10 max-w-xl rounded-3xl border border-mid/15 bg-white/55 p-6 text-center sm:p-10">
         <div className="flex flex-col items-start gap-5">
-          {email && (
-            <a
-              href={`mailto:${email}`}
-              className="flex max-w-full items-center gap-3 text-base text-deep transition-colors hover:text-orange sm:text-lg"
-            >
-              <MailIcon />
-              <span className="min-w-0 break-all">{email}</span>
-            </a>
-          )}
+          {email && <CopyEmail email={email} />}
           {phone && (
             <a
               href={`tel:${phone.replace(/[^+\d]/g, '')}`}
