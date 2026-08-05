@@ -21,7 +21,7 @@ export const metadata: Metadata = {
 }
 
 const dropCap =
-  'first-letter:float-left first-letter:mr-3 first-letter:mt-1 first-letter:font-display first-letter:text-[3.4rem] first-letter:font-normal first-letter:leading-[0.7] first-letter:text-orange'
+  'first-letter:float-left first-letter:mr-[3px] first-letter:mt-0.5 first-letter:font-display first-letter:text-[2.2rem] first-letter:font-normal first-letter:leading-[0.72] first-letter:text-orange'
 
 // Plain text of a Portable Text paragraph block.
 function blockText(block: PortableTextBlock): string {
