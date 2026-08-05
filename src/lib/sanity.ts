@@ -18,7 +18,7 @@ export async function getHomePage(): Promise<HomePage | null> {
   return client.fetch<HomePage | null>(
     `*[_type == "homePage"][0]{
       _id, _type, heading, subheading, values, intro, ceilingImage,
-      reviewsHeading, primaryCta, secondaryCta,
+      ceilingCaption, reviewsHeading, reviewsSubtext, primaryCta, secondaryCta,
       aboutTeaserHeading, aboutTeaserText
     }`,
     {},

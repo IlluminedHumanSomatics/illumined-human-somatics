@@ -37,7 +37,9 @@ export interface HomePage {
   values?: string[]
   intro?: string
   ceilingImage?: SanityImage
+  ceilingCaption?: string
   reviewsHeading?: string
+  reviewsSubtext?: string
   primaryCta?: CtaLink
   secondaryCta?: CtaLink
   aboutTeaserHeading?: string

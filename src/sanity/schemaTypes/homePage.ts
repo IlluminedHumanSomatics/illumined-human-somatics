@@ -46,11 +46,25 @@ export const homePage = defineType({
       fields: [defineField({ name: 'alt', title: 'Alt text', type: 'string' })],
     }),
     defineField({
+      name: 'ceilingCaption',
+      title: 'Yurt Ceiling Photo — Caption',
+      type: 'string',
+      description:
+        'The line shown over the yurt ceiling photo. Leave blank to use the default ("The view from the massage table.").',
+    }),
+    defineField({
       name: 'reviewsHeading',
       title: 'Reviews — Heading',
       type: 'string',
       description:
         'Heading above the reviews. Leave blank to use the default ("What people are saying").',
+    }),
+    defineField({
+      name: 'reviewsSubtext',
+      title: 'Reviews — Subtext (under the stars)',
+      type: 'string',
+      description:
+        'The small line beside the stars. Leave blank to use the default ("5.0 · Verified on MassageBook").',
     }),
     defineField({
       name: 'primaryCta',
