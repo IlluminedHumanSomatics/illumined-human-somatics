@@ -2,25 +2,33 @@ import { defineType, defineField } from 'sanity'
 
 export const workshop = defineType({
   name: 'workshop',
-  title: 'Workshop',
+  title: 'Retreat / Workshop',
   type: 'document',
   fields: [
     defineField({
       name: 'title',
-      title: 'Title',
+      title: 'Name of retreat',
       type: 'string',
       validation: (rule) => rule.required(),
     }),
     defineField({
-      name: 'slug',
-      title: 'Slug',
-      type: 'slug',
-      options: { source: 'title', maxLength: 96 },
-      validation: (rule) => rule.required(),
+      name: 'gallery',
+      title: 'Photos (up to 4)',
+      type: 'array',
+      of: [
+        {
+          type: 'image',
+          options: { hotspot: true },
+          fields: [{ name: 'alt', title: 'Alt text', type: 'string' }],
+        },
+      ],
+      validation: (rule) => rule.max(4),
+      description:
+        'Add 1–4 photos. One photo shows large; 2–4 show as a grid on the page.',
     }),
     defineField({
       name: 'date',
-      title: 'Date',
+      title: 'Start Date',
       type: 'date',
     }),
     defineField({
@@ -30,78 +38,40 @@ export const workshop = defineType({
       description: 'For multi-day retreats. Leave blank for a single-day event.',
     }),
     defineField({
-      name: 'startTime',
-      title: 'Start Time',
-      type: 'string',
-    }),
-    defineField({
-      name: 'endTime',
-      title: 'End Time',
-      type: 'string',
-    }),
-    defineField({
       name: 'location',
       title: 'Location',
       type: 'string',
     }),
     defineField({
       name: 'shortDescription',
-      title: 'Short Description',
+      title: 'Description',
       type: 'text',
-    }),
-    defineField({
-      name: 'fullDescription',
-      title: 'Full Description',
-      type: 'array',
-      of: [{ type: 'block' }],
     }),
     defineField({
       name: 'price',
       title: 'Price',
       type: 'string',
-    }),
-    defineField({
-      name: 'image',
-      title: 'Image',
-      type: 'image',
-      options: { hotspot: true },
-      fields: [
-        defineField({
-          name: 'alt',
-          title: 'Alt text',
-          type: 'string',
-        }),
-      ],
-    }),
-    defineField({
-      name: 'gallery',
-      title: 'Photo Gallery',
-      type: 'array',
-      of: [
-        {
-          type: 'image',
-          options: { hotspot: true },
-          fields: [{ name: 'alt', title: 'Alt text', type: 'string' }],
-        },
-      ],
-      description:
-        'Upload multiple photos (great for retreats) — shown as a grid on the page. Looks best with 2 or 4. If left empty, the single Image above is used instead.',
+      description: 'e.g. "From $2,888". Shown as entered.',
     }),
     defineField({
       name: 'externalBookingLink',
-      title: 'External Booking Link',
+      title: 'Retreat info / registration link',
       type: 'url',
-    }),
-    defineField({
-      name: 'isSoldOut',
-      title: 'Sold Out',
-      type: 'boolean',
-      initialValue: false,
+      description:
+        "The card's button links here — the retreat's own info or sign-up page. Leave blank to show an “Inquire” button that points to the Contact page instead.",
     }),
     defineField({
       name: 'isFeatured',
       title: 'Featured',
       type: 'boolean',
+      description: 'Adds a small “Featured retreat” label above the name.',
+      initialValue: false,
+    }),
+    defineField({
+      name: 'isSoldOut',
+      title: 'Sold Out',
+      type: 'boolean',
+      description: 'Replaces the button with a “Sold out” label.',
       initialValue: false,
     }),
   ],

@@ -10,27 +10,6 @@ export const metadata: Metadata = {
     'Immersive retreats and workshops with Molly Dilg — invitations to slow down, move, and come home to your body in community.',
 }
 
-// Shown until Molly adds her own workshops/retreats in the Studio.
-type FallbackWorkshop = Workshop & { imageUrl?: string; images?: string[] }
-
-const FALLBACK_WORKSHOPS: FallbackWorkshop[] = [
-  {
-    _id: 'fallback-journey-to-joy',
-    _type: 'workshop',
-    images: ['/journey-to-joy.jpg', '/journey-to-joy-lounge.jpg'],
-    title: 'Journey to Joy — A Queer Wellness Retreat',
-    slug: { current: 'journey-to-joy' },
-    date: '2026-11-05',
-    endDate: '2026-11-10',
-    location: 'Bacalar, Mexico',
-    shortDescription:
-      'Six days on the lagoon for LGBTQIA+ folks to rest, play, move, laugh, and let joy become something lived in the body again. Daily yoga, breathwork, sound healing, paddleboarding, community circles, and all meals included — co-led by Molly as the yoga & somatic guide.',
-    price: 'From $2,888',
-    externalBookingLink: 'https://www.risetoher.com/retreat-queer-joy',
-    isFeatured: true,
-  },
-]
-
 function formatDateRange(date?: string, endDate?: string) {
   if (!date) return null
   const parse = (d: string) => new Date(`${d}T00:00:00`)
@@ -62,25 +41,23 @@ function formatDateRange(date?: string, endDate?: string) {
   })
 }
 
-function WorkshopCard({ workshop }: { workshop: FallbackWorkshop }) {
+function WorkshopCard({ workshop }: { workshop: Workshop }) {
   const dateRange = formatDateRange(workshop.date, workshop.endDate)
   const meta = [dateRange, workshop.location].filter(Boolean).join(' · ')
-  const imageUrl = workshop.image
-    ? urlFor(workshop.image).width(1200).quality(80).url()
-    : (workshop.imageUrl ?? null)
-  const gallery = workshop.gallery?.length
-    ? workshop.gallery.map((img) => urlFor(img).width(1000).quality(80).url())
-    : (workshop.images ?? [])
+  const photos = (workshop.gallery ?? []).map((img) => ({
+    src: urlFor(img).width(1200).quality(80).url(),
+    alt: img.alt,
+  }))
 
   return (
     <article className="overflow-hidden rounded-3xl border border-mid/15 bg-white/55">
-      {gallery.length > 1 ? (
+      {photos.length > 1 ? (
         <div className="grid grid-cols-2 gap-1">
-          {gallery.slice(0, 4).map((src, i) => (
-            <div key={src} className="relative aspect-[4/3]">
+          {photos.slice(0, 4).map((p, i) => (
+            <div key={p.src} className="relative aspect-[4/3]">
               <Image
-                src={src}
-                alt={i === 0 ? workshop.title : ''}
+                src={p.src}
+                alt={i === 0 ? workshop.title : (p.alt ?? '')}
                 fill
                 sizes="(min-width: 768px) 384px, 50vw"
                 className="object-cover"
@@ -88,11 +65,11 @@ function WorkshopCard({ workshop }: { workshop: FallbackWorkshop }) {
             </div>
           ))}
         </div>
-      ) : imageUrl ? (
+      ) : photos.length === 1 ? (
         <div className="relative aspect-[16/9] w-full sm:aspect-[2/1]">
           <Image
-            src={imageUrl}
-            alt={workshop.image?.alt ?? workshop.title}
+            src={photos[0].src}
+            alt={photos[0].alt ?? workshop.title}
             fill
             sizes="(min-width: 768px) 768px, 100vw"
             className="object-cover"
@@ -155,13 +132,12 @@ function WorkshopCard({ workshop }: { workshop: FallbackWorkshop }) {
 }
 
 export default async function WorkshopsPage() {
-  let cms: Workshop[] = []
+  let workshops: Workshop[] = []
   try {
-    cms = await getWorkshops()
+    workshops = await getWorkshops()
   } catch {
-    cms = []
+    workshops = []
   }
-  const workshops: FallbackWorkshop[] = cms.length > 0 ? cms : FALLBACK_WORKSHOPS
 
   return (
     <section className="px-6 py-12">
@@ -177,24 +153,40 @@ export default async function WorkshopsPage() {
         </p>
       </div>
 
-      {/* ── Listings ─────────────────────────────────────────── */}
-      <div className="mx-auto mt-12 flex max-w-3xl flex-col gap-8">
-        {workshops.map((w) => (
-          <WorkshopCard key={w._id} workshop={w} />
-        ))}
-      </div>
+      {/* ── Listings (from the CMS) ──────────────────────────── */}
+      {workshops.length > 0 ? (
+        <div className="mx-auto mt-12 flex max-w-3xl flex-col gap-8">
+          {workshops.map((w) => (
+            <WorkshopCard key={w._id} workshop={w} />
+          ))}
+        </div>
+      ) : (
+        <div className="mx-auto mt-12 max-w-xl rounded-3xl border border-mid/15 bg-white/55 px-8 py-12 text-center">
+          <p className="leading-relaxed text-mid">
+            No retreats on the calendar right now — check back soon.
+          </p>
+          <Link
+            href="/contact"
+            className="mt-6 inline-block rounded-full bg-orange px-7 py-2.5 font-sans text-[10px] font-medium uppercase tracking-[0.18em] text-white transition-colors hover:bg-terra-deep"
+          >
+            Get in touch →
+          </Link>
+        </div>
+      )}
 
       {/* ── Nudge ────────────────────────────────────────────── */}
-      <p className="mx-auto mt-12 max-w-2xl text-center text-sm text-mid/80">
-        Curious about an upcoming gathering?{' '}
-        <Link
-          href="/contact"
-          className="font-medium text-turq-deep underline-offset-4 hover:underline"
-        >
-          Get in touch
-        </Link>
-        .
-      </p>
+      {workshops.length > 0 && (
+        <p className="mx-auto mt-12 max-w-2xl text-center text-sm text-mid/80">
+          Curious about an upcoming gathering?{' '}
+          <Link
+            href="/contact"
+            className="font-medium text-turq-deep underline-offset-4 hover:underline"
+          >
+            Get in touch
+          </Link>
+          .
+        </p>
+      )}
     </section>
   )
 }

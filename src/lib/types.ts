@@ -93,16 +93,11 @@ export interface Workshop {
   _id: string
   _type: 'workshop'
   title: string
-  slug: { current: string }
   date?: string
   endDate?: string
-  startTime?: string
-  endTime?: string
   location?: string
   shortDescription?: string
-  fullDescription?: PortableTextBlock[]
   price?: string
-  image?: SanityImage
   gallery?: SanityImage[]
   externalBookingLink?: string
   isSoldOut?: boolean
