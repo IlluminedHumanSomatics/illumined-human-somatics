@@ -68,6 +68,14 @@ export const massagePage = defineType({
       description: 'The paragraph above the booking scheduler.',
     }),
     defineField({
+      name: 'bookingUrl',
+      title: 'Booking button link',
+      type: 'url',
+      group: 'booking',
+      description:
+        "Molly's MassageBook booking page (the link from her Instagram bio). Powers the “Book a session” button in the hero. This is the full booking page — different from the embedded widget below.",
+    }),
+    defineField({
       name: 'bookingEmbedUrl',
       title: 'Embedded scheduler URL',
       type: 'url',

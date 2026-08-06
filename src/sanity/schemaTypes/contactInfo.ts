@@ -7,7 +7,7 @@ export const contactInfo = defineType({
   type: 'document',
   groups: [
     { name: 'text', title: 'Page text' },
-    { name: 'details', title: 'Contact details & links' },
+    { name: 'details', title: 'Contact details' },
   ],
   fields: [
     defineField({
@@ -34,14 +34,6 @@ export const contactInfo = defineType({
       group: 'text',
       description:
         'The small note under the contact details. Leave blank for the default ("Sessions are by appointment — the exact studio location is shared when you book.").',
-    }),
-    defineField({
-      name: 'bookingUrl',
-      title: 'MassageBook Booking Link',
-      type: 'url',
-      group: 'details',
-      description:
-        "Molly's MassageBook booking page link (the one from her Instagram bio). Powers the “Book a session” button in the massage hero. Note: the embedded yurt scheduler has its own field in Massage Page → Yurt Booking Section → Embedded scheduler URL.",
     }),
     defineField({
       name: 'phone',
@@ -75,6 +67,6 @@ export const contactInfo = defineType({
     }),
   ],
   preview: {
-    prepare: () => ({ title: 'Contact & Booking Links' }),
+    prepare: () => ({ title: 'Contact' }),
   },
 })

@@ -1,11 +1,6 @@
 import type { Metadata } from 'next'
-import {
-  getContactInfo,
-  getMassagePage,
-  getPracticeLocations,
-  urlFor,
-} from '@/lib/sanity'
-import type { ContactInfo, MassagePage, PracticeLocation } from '@/lib/types'
+import { getMassagePage, getPracticeLocations, urlFor } from '@/lib/sanity'
+import type { MassagePage, PracticeLocation } from '@/lib/types'
 import { safe } from '@/lib/safe'
 import { HeroVideo } from '@/components/HeroVideo'
 import { MapPin } from '@/components/MapPin'
@@ -18,15 +13,14 @@ export const metadata: Metadata = {
 }
 
 export default async function MassagePage() {
-  const [contact, massage, locations] = await Promise.all([
-    safe<ContactInfo | null>(getContactInfo(), null),
+  const [massage, locations] = await Promise.all([
     safe<MassagePage | null>(getMassagePage(), null),
     safe<PracticeLocation[]>(getPracticeLocations('massage'), []),
   ])
 
   const bookingUrl =
-    contact?.bookingUrl ??
-    'https://www.massagebook.com/therapists/illumined-human-somatics/widget/services'
+    massage?.bookingUrl ??
+    'https://www.massagebook.com/business/30389212/select-product/services'
 
   const heroPosterUrl = massage?.heroPoster
     ? urlFor(massage.heroPoster).width(1400).quality(70).url()

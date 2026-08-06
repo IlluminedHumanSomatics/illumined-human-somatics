@@ -27,7 +27,7 @@ export const structure: StructureResolver = (S) =>
         .id('about')
         .child(S.document().schemaType('about').documentId('about')),
       S.listItem()
-        .title('Contact & Booking Links')
+        .title('Contact')
         .id('contactInfo')
         .child(
           S.document().schemaType('contactInfo').documentId('contactInfo'),
