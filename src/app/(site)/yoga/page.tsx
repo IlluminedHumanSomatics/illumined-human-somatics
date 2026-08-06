@@ -11,36 +11,11 @@ export const metadata: Metadata = {
     "Molly's group yoga classes at NOW Yoga and YogaSix Slabtown in Portland.",
 }
 
-// Shown only if no yoga locations have been added in Studio yet.
-const fallbackLocations: PracticeLocation[] = [
-  {
-    _id: 'fb-nowyoga',
-    _type: 'practiceLocation',
-    name: 'NOW Yoga',
-    page: 'yoga',
-    area: 'Portland',
-    description: 'Weekly group classes in a warm, welcoming community space.',
-    linkLabel: 'View schedule',
-    linkUrl: 'https://www.nowyogapdx.com/schedule',
-  },
-  {
-    _id: 'fb-yogasix',
-    _type: 'practiceLocation',
-    name: 'YogaSix · Slabtown',
-    page: 'yoga',
-    area: 'NW Portland',
-    description: 'Heated and flowing group classes at the Slabtown studio.',
-    linkLabel: 'View schedule',
-    linkUrl: 'https://www.yogasix.com/location/slabtown',
-  },
-]
-
 export default async function YogaPage() {
-  const [yoga, cmsLocations] = await Promise.all([
+  const [yoga, locations] = await Promise.all([
     safe<YogaPage | null>(getYogaPage(), null),
     safe<PracticeLocation[]>(getPracticeLocations('yoga'), []),
   ])
-  const locations = cmsLocations.length > 0 ? cmsLocations : fallbackLocations
 
   // CMS text with the current copy as fallback (editable in Studio → Yoga Page).
   const heroHeading = yoga?.heroHeading ?? 'Yoga with Molly'
@@ -77,11 +52,13 @@ export default async function YogaPage() {
         )}
       </div>
 
-      <div className="mx-auto mt-12 grid max-w-3xl gap-6 sm:grid-cols-2">
-        {locations.map((loc) => (
-          <LocationCard key={loc._id} location={loc} />
-        ))}
-      </div>
+      {locations.length > 0 && (
+        <div className="mx-auto mt-12 grid max-w-3xl gap-6 sm:grid-cols-2">
+          {locations.map((loc) => (
+            <LocationCard key={loc._id} location={loc} />
+          ))}
+        </div>
+      )}
     </section>
   )
 }
