@@ -24,22 +24,6 @@ function outerColor(i: number): { c: string; b: number } {
   return { c: '#c47616', b: 1.0 } // gold base
 }
 
-const innerPattern = [
-  { l: 140, o: 0.3, w: 0.62 },
-  { l: 112, o: 0.15, w: 0.34 },
-  { l: 128, o: 0.22, w: 0.48 },
-  { l: 104, o: 0.11, w: 0.28 },
-]
-const innerColors = [
-  '#d4a010',
-  '#c48810',
-  '#d07028',
-  '#c87818',
-  '#e8b820',
-  '#d4a010',
-  '#c88810',
-]
-
 function ray(angle: number, start: number, length: number) {
   return {
     x1: +(CX + Math.sin(angle) * start).toFixed(2),
@@ -49,26 +33,25 @@ function ray(angle: number, start: number, length: number) {
   }
 }
 
+// The vessel (the orange centre ring). The ray mask below reuses these so the
+// cut always lands exactly on the ring's edge — rays touch it with no gap and
+// no overflow inside. Resizing the ring here moves the mask with it.
+const VESSEL_RX = 118
+const VESSEL_RY = 124
+
+// Rays begin well inside the vessel; the mask trims the overlap, so their
+// round caps never show at the seam.
+const RAY_START = 70
 const OUTER_N = 60
-const OUTER_START = 122
+
+// The mask's region, in user space — wide enough to cover the longest rays
+// (they reach past the viewBox, which is why the svg allows overflow).
+const MASK_BOX = { x: -60, y: -60, width: 640, height: 640 }
 const outerRays = Array.from({ length: OUTER_N }, (_, i) => {
   const angle = (i / OUTER_N) * Math.PI * 2
   const p = outerPattern[i % outerPattern.length]
   const { c, b } = outerColor(i)
-  return { ...ray(angle, OUTER_START, p.l), stroke: c, w: p.w, o: +(p.o * b).toFixed(2) }
-})
-
-const INNER_N = 42
-const INNER_START = 66
-const innerRays = Array.from({ length: INNER_N }, (_, i) => {
-  const angle = (i / INNER_N) * Math.PI * 2
-  const p = innerPattern[i % innerPattern.length]
-  return {
-    ...ray(angle, INNER_START, p.l),
-    stroke: innerColors[i % innerColors.length],
-    w: p.w,
-    o: p.o,
-  }
+  return { ...ray(angle, RAY_START, p.l), stroke: c, w: p.w, o: +(p.o * b).toFixed(2) }
 })
 
 export function SunMotif({ className }: { className?: string }) {
@@ -116,41 +99,28 @@ export function SunMotif({ className }: { className?: string }) {
         <filter id="ihs-blurS" x="-18%" y="-18%" width="136%" height="136%">
           <feGaussianBlur stdDeviation="4" />
         </filter>
+        <filter id="ihs-maskblur">
+          <feGaussianBlur stdDeviation="1" />
+        </filter>
+        {/* Hides the rays inside the ring: white reveals them, the soft black
+            ellipse (the ring) masks them out so they emerge at its edge. */}
+        <mask id="ihs-ray-mask" maskUnits="userSpaceOnUse" {...MASK_BOX}>
+          <rect {...MASK_BOX} fill="white" />
+          {/* Exactly the vessel's size: the rays emerge right AT the ring's
+              edge — touching it, with only a 1px feather so the seam is soft
+              rather than a razor cut. */}
+          <ellipse
+            cx={CX}
+            cy={CY}
+            rx={VESSEL_RX}
+            ry={VESSEL_RY}
+            fill="black"
+            filter="url(#ihs-maskblur)"
+          />
+        </mask>
       </defs>
 
       <circle cx={CX} cy={CY} r="260" fill="url(#ihs-ambient)" />
-
-      <g className="ihs-spin">
-        {outerRays.map((r, i) => (
-          <line
-            key={i}
-            x1={r.x1}
-            y1={r.y1}
-            x2={r.x2}
-            y2={r.y2}
-            stroke={r.stroke}
-            strokeWidth={r.w}
-            opacity={r.o}
-            strokeLinecap="round"
-          />
-        ))}
-      </g>
-
-      <g className="ihs-spin-rev">
-        {innerRays.map((r, i) => (
-          <line
-            key={i}
-            x1={r.x1}
-            y1={r.y1}
-            x2={r.x2}
-            y2={r.y2}
-            stroke={r.stroke}
-            strokeWidth={r.w}
-            opacity={r.o}
-            strokeLinecap="round"
-          />
-        ))}
-      </g>
 
       {/* soft wide body glow */}
       <circle
@@ -163,13 +133,34 @@ export function SunMotif({ className }: { className?: string }) {
         filter="url(#ihs-blurXL)"
       />
 
+      {/* rays — the mask lives on a STATIC wrapper (not the spinning group),
+          so the cut boundary never moves while the rays rotate inside it:
+          they always emerge exactly at the ring's edge */}
+      <g mask="url(#ihs-ray-mask)">
+        <g className="ihs-spin">
+          {outerRays.map((r, i) => (
+            <line
+              key={i}
+              x1={r.x1}
+              y1={r.y1}
+              x2={r.x2}
+              y2={r.y2}
+              stroke={r.stroke}
+              strokeWidth={r.w}
+              opacity={r.o}
+              strokeLinecap="round"
+            />
+          ))}
+        </g>
+      </g>
+
       {/* the vessel — the body, breathing */}
       <ellipse
         className="ihs-breathe"
         cx={CX}
         cy={CY}
-        rx="118"
-        ry="124"
+        rx={VESSEL_RX}
+        ry={VESSEL_RY}
         fill="url(#ihs-body)"
         stroke="rgba(184,90,52,.22)"
         strokeWidth="0.8"
@@ -185,20 +176,6 @@ export function SunMotif({ className }: { className?: string }) {
         filter="url(#ihs-blurL)"
       />
       <circle cx={CX} cy={CY} r="72" fill="#f2a44a" opacity="0.42" filter="url(#ihs-blurM)" />
-
-      {/* faint yurt rafters (toono) — spokes reaching from the hub out to the rim */}
-      <g stroke="#b8562d" strokeWidth="1" strokeLinecap="round" opacity="0.2">
-        {Array.from({ length: 16 }).map((_, i) => (
-          <line
-            key={i}
-            x1={CX}
-            y1={CY - 66}
-            x2={CX}
-            y2={CY - 122}
-            transform={`rotate(${(360 / 16) * i} ${CX} ${CY})`}
-          />
-        ))}
-      </g>
 
       {/* the window of light, breathing */}
       <circle

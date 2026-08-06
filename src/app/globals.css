@@ -53,11 +53,6 @@ body {
     transform: rotate(360deg);
   }
 }
-@keyframes ihs-spin-rev {
-  to {
-    transform: rotate(-360deg);
-  }
-}
 @keyframes ihs-breathe {
   0%,
   100% {
@@ -77,18 +72,18 @@ body {
   }
 }
 
-.ihs-spin,
-.ihs-spin-rev,
 .ihs-breathe,
 .ihs-pulse {
   transform-box: fill-box;
   transform-origin: center;
 }
 .ihs-spin {
+  /* view-box, not fill-box: the rays' bounding box isn't symmetric, so a
+     fill-box origin makes the whole disc wobble off-center as it turns.
+     The viewBox center is the sun's true center. */
+  transform-box: view-box;
+  transform-origin: center;
   animation: ihs-spin 240s linear infinite;
-}
-.ihs-spin-rev {
-  animation: ihs-spin-rev 170s linear infinite;
 }
 .ihs-breathe {
   animation: ihs-breathe 9s ease-in-out infinite;
@@ -99,7 +94,6 @@ body {
 
 @media (prefers-reduced-motion: reduce) {
   .ihs-spin,
-  .ihs-spin-rev,
   .ihs-breathe,
   .ihs-pulse {
     animation: none;
