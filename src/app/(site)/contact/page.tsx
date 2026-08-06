@@ -44,6 +44,13 @@ export default async function ContactPage() {
     'https://www.instagram.com/illumined_human_somatics/'
   const instagramHandle = contact?.instagramHandle ?? '@illumined_human_somatics'
   const location = contact?.locationDescription ?? 'Portland, Oregon'
+  const heading = contact?.heading ?? 'Let’s connect'
+  const intro =
+    contact?.intro ??
+    'Whether you’re booking your first session or simply have a question, I’d love to hear from you.'
+  const appointmentNote =
+    contact?.appointmentNote ??
+    'Sessions are by appointment — the exact studio location is shared when you book.'
 
   return (
     <section className="px-6 py-12">
@@ -52,11 +59,8 @@ export default async function ContactPage() {
         <p className="font-sans text-[12px] font-medium uppercase tracking-[0.16em] text-turq-deep">
           Contact
         </p>
-        <h1 className="mt-3 text-4xl text-deep sm:text-5xl">Let&rsquo;s connect</h1>
-        <p className="mx-auto mt-4 max-w-md leading-relaxed text-mid">
-          Whether you&rsquo;re booking your first session or simply have a
-          question, I&rsquo;d love to hear from you.
-        </p>
+        <h1 className="mt-3 text-4xl text-deep sm:text-5xl">{heading}</h1>
+        <p className="mx-auto mt-4 max-w-md leading-relaxed text-mid">{intro}</p>
       </div>
 
       {/* ── Reach out ────────────────────────────────────────── */}
@@ -88,8 +92,7 @@ export default async function ContactPage() {
         </div>
 
         <p className="mt-8 text-sm leading-relaxed text-mid/75">
-          Sessions are by appointment — the exact studio location is shared when
-          you book.
+          {appointmentNote}
         </p>
       </div>
 

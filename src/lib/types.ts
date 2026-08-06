@@ -139,6 +139,9 @@ export interface PracticeLocation {
 export interface ContactInfo {
   _id: string
   _type: 'contactInfo'
+  heading?: string
+  intro?: string
+  appointmentNote?: string
   bookingUrl?: string
   phone?: string
   email?: string
